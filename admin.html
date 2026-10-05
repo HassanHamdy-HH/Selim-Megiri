@@ -1,0 +1,394 @@
+<!DOCTYPE html>
+<html lang="it">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>Selim Megiri — Pannello prenotazioni</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@600;700&family=Montserrat:wght@400;500;600;700&display=swap" rel="stylesheet">
+<style>
+  *{box-sizing:border-box;margin:0;padding:0;}
+  html{color-scheme:light;}
+  :root{
+    --ink:#0B2A45;--ink-soft:#4B6885;--ink-faint:#7B93A9;--bg:#FBF6EB;--bg-alt:#F1E1C4;--card:#FFFDF7;
+    --primary:#0B5EA8;--gold:#B4790F;--gold-bright:#F5B642;--border:#E2CDA0;--border-soft:#EADFC4;
+    --ok:#1E8E5A;--warn:#C0392B;
+  }
+  body{font-family:'Montserrat',sans-serif;background:var(--bg);color:var(--ink);padding-top:env(safe-area-inset-top,0px);}
+  h1,h2,.brand{font-family:'Playfair Display',serif;}
+  header{background:var(--ink);color:#F6EFDD;padding:18px clamp(16px,4vw,36px);display:flex;align-items:center;justify-content:space-between;flex-wrap:wrap;gap:10px;}
+  header .brand{font-size:19px;}
+  header .brand span{color:var(--gold-bright);font-size:12px;font-family:'Montserrat',sans-serif;letter-spacing:.06em;display:block;}
+  nav{display:flex;gap:6px;}
+  nav button{background:none;border:1px solid rgba(245,182,66,.4);color:#F6EFDD;padding:8px 16px;border-radius:3px;font-size:13px;cursor:pointer;font-family:inherit;}
+  nav button.active{background:var(--gold-bright);color:#2B1B02;border-color:var(--gold-bright);font-weight:600;}
+  main{max-width:1100px;margin:0 auto;padding:24px clamp(16px,4vw,36px) 60px;}
+  .view{display:none;}
+  .view.active{display:block;}
+  .stats{display:grid;grid-template-columns:repeat(auto-fit,minmax(180px,1fr));gap:14px;margin-bottom:26px;}
+  .stat{background:var(--card);border:1px solid var(--border-soft);border-radius:4px;padding:18px 20px;}
+  .stat strong{display:block;font-family:'Playfair Display',serif;font-size:26px;color:var(--primary);}
+  .stat span{font-size:12px;color:var(--ink-faint);}
+  .toolbar{display:flex;gap:10px;flex-wrap:wrap;margin-bottom:16px;align-items:center;}
+  input,select,textarea{font-family:inherit;font-size:13.5px;padding:9px 11px;border:1px solid var(--border);border-radius:3px;background:var(--bg);color:var(--ink);}
+  .btn{background:var(--gold-bright);color:#2B1B02;border:none;padding:10px 18px;border-radius:3px;font-weight:600;font-size:13.5px;cursor:pointer;font-family:inherit;}
+  .btn.secondary{background:none;border:1px solid var(--border);color:var(--ink-soft);}
+  .btn.small{padding:5px 10px;font-size:12px;}
+  .btn.danger{background:var(--warn);color:#fff;}
+  table{width:100%;border-collapse:collapse;background:var(--card);border:1px solid var(--border-soft);font-size:13px;}
+  th,td{padding:9px 10px;text-align:right;border-bottom:1px solid var(--border-soft);}
+  th{background:var(--bg-alt);font-size:11.5px;color:var(--ink-soft);text-transform:uppercase;letter-spacing:.03em;}
+  tr:last-child td{border-bottom:none;}
+  .badge{display:inline-block;padding:3px 9px;border-radius:999px;font-size:11px;font-weight:600;}
+  .badge.ok{background:#E5F3EB;color:var(--ok);}
+  .badge.attesa{background:#FCEFD9;color:var(--gold);}
+  .badge.pieno,.badge.cancellato{background:#FBE7E4;color:var(--warn);}
+  .neg{color:var(--warn);font-weight:700;}
+  .empty{padding:40px;text-align:center;color:var(--ink-faint);font-size:13.5px;}
+  .modal-bg{position:fixed;inset:0;background:rgba(11,42,69,.55);display:none;align-items:center;justify-content:center;z-index:50;padding:16px;}
+  .modal-bg.open{display:flex;}
+  .modal{background:var(--card);max-width:520px;width:100%;max-height:88vh;overflow-y:auto;border-radius:5px;padding:26px 24px;}
+  .modal h2{font-size:20px;margin-bottom:16px;}
+  .frow{display:grid;grid-template-columns:1fr 1fr;gap:10px;margin-bottom:10px;}
+  .field{display:flex;flex-direction:column;gap:4px;margin-bottom:10px;}
+  .field label{font-size:11.5px;color:var(--ink-soft);font-weight:600;}
+  .field input,.field select{width:100%;}
+  .sdt{display:grid;grid-template-columns:repeat(3,1fr);gap:8px;}
+  .live-calc{font-size:12.5px;color:var(--ink-soft);background:var(--bg-alt);padding:8px 10px;border-radius:3px;margin:10px 0;}
+  .modal-actions{display:flex;gap:10px;margin-top:16px;justify-content:flex-end;}
+  .prog-list{display:grid;gap:1px;background:var(--border-soft);border:1px solid var(--border-soft);}
+  .prog-row{background:var(--card);padding:9px 14px;display:flex;justify-content:space-between;font-size:13px;}
+  .prog-row .name{color:var(--ink);}
+  .prog-row .price{color:var(--gold);font-weight:700;}
+  .prog-group{background:var(--bg-alt);padding:8px 14px;font-size:11.5px;font-weight:700;letter-spacing:.03em;color:var(--ink-soft);}
+  .note{font-size:12px;color:var(--ink-faint);margin-top:14px;}
+  .gate{position:fixed;inset:0;background:var(--ink);display:flex;align-items:center;justify-content:center;z-index:200;padding:20px;}
+  .gate-box{background:var(--card);max-width:340px;width:100%;padding:32px 28px;border-radius:6px;text-align:center;}
+  .gate-box .brand{font-size:19px;margin-bottom:4px;}
+  .gate-box p{font-size:12.5px;color:var(--ink-faint);margin-bottom:18px;}
+  .gate-box input{width:100%;margin-bottom:10px;text-align:center;}
+  .gate-box .btn{width:100%;}
+  .gate-err{font-size:12px;color:var(--warn);margin-top:8px;display:none;}
+  .gate-err.show{display:block;}
+  #appContent{display:none;}
+  @media(max-width:700px){.frow,.sdt{grid-template-columns:1fr 1fr;}table{font-size:11.5px;}th,td{padding:6px 5px;}}
+</style>
+</head>
+<body>
+
+<div class="gate" id="gate">
+  <div class="gate-box">
+    <div class="brand">Selim Megiri</div>
+    <p>Pannello prenotazioni — accesso riservato</p>
+    <input type="password" id="gatePass" placeholder="Password" autocomplete="current-password">
+    <button class="btn" id="gateBtn" style="width:100%;">Entra</button>
+    <p class="gate-err" id="gateErr">Password errata, riprova.</p>
+  </div>
+</div>
+
+<div id="appContent">
+<header>
+  <div class="brand">Selim Megiri <span>PANNELLO PRENOTAZIONI — USO INTERNO</span></div>
+  <nav>
+    <button data-view="panoramica" class="active">Panoramica</button>
+    <button data-view="prenotazioni">Prenotazioni</button>
+    <button data-view="programmi">Programmi</button>
+  </nav>
+</header>
+<main>
+
+  <section id="panoramica" class="view active">
+    <div class="stats" id="statsBox">
+      <div class="stat"><strong id="stTot">0</strong><span>Prenotazioni totali</span></div>
+      <div class="stat"><strong id="stPax">0</strong><span>Persone totali prenotate</span></div>
+      <div class="stat"><strong id="stRev">0 €</strong><span>Incasso totale</span></div>
+      <div class="stat"><strong id="stNext">—</strong><span>Prossima partenza</span></div>
+    </div>
+    <p class="note">Dati salvati automaticamente e sincronizzati ad ogni apertura di questa pagina.</p>
+  </section>
+
+  <section id="prenotazioni" class="view">
+    <div class="toolbar">
+      <button class="btn" id="btnAdd">+ Nuova prenotazione</button>
+      <input type="text" id="searchBox" placeholder="Cerca per nome o telefono...">
+    </div>
+    <div id="tableWrap"><div class="empty">Caricamento...</div></div>
+  </section>
+
+  <section id="programmi" class="view">
+    <p class="note" style="margin-bottom:14px;">Elenco prezzi di riferimento (gli stessi del sito pubblico).</p>
+    <div id="progList" class="prog-list"></div>
+  </section>
+
+</main>
+</div>
+
+<div class="modal-bg" id="modalBg">
+  <div class="modal">
+    <h2 id="modalTitle">Nuova prenotazione</h2>
+    <input type="hidden" id="editId">
+    <div class="frow">
+      <div class="field"><label>Nome</label><input id="fNome" type="text"></div>
+      <div class="field"><label>Telefono</label><input id="fTel" type="text"></div>
+    </div>
+    <div class="field"><label>Programma</label><select id="fProg"></select></div>
+    <div class="frow">
+      <div class="field"><label>Data da</label><input id="fDa" type="date"></div>
+      <div class="field"><label>Data a</label><input id="fA" type="date"></div>
+    </div>
+    <div class="field"><label>S / D / T (Singola / Doppia / Tripla)</label>
+      <div class="sdt">
+        <input id="fS" type="number" min="0" value="0" placeholder="S">
+        <input id="fD" type="number" min="0" value="0" placeholder="D">
+        <input id="fT" type="number" min="0" value="0" placeholder="T">
+      </div>
+    </div>
+    <div class="live-calc" id="liveCalc">Totale persone: 0 — Rimasti al gruppo di 6: 6</div>
+    <div class="frow">
+      <div class="field"><label>Importo totale (€)</label><input id="fImporto" type="number" min="0"></div>
+      <div class="field"><label>Disponibile</label>
+        <select id="fDisp">
+          <option value="ok">Ok</option>
+          <option value="attesa">In attesa</option>
+          <option value="pieno">Al completo</option>
+          <option value="cancellato">Cancellato</option>
+        </select>
+      </div>
+    </div>
+    <div class="modal-actions">
+      <button class="btn secondary" id="btnDelete" style="display:none;">Elimina</button>
+      <button class="btn secondary" id="btnCancel">Annulla</button>
+      <button class="btn" id="btnSave">Salva</button>
+    </div>
+  </div>
+</div>
+
+<script>
+var PROGRAMMI = {
+  "Pacchetti": [
+    ["Pro. Deserto — 3 notti Cairo + 3 Alessandria/Siwa","510 €"],
+    ["Pro. Oasi — 7 notti (Cairo, Alessandria, Fayoum, Bahariya)","Su richiesta"],
+    ["Settimana mare Ain Sokhna/Suez — 6 notti","650 €"],
+    ["Pro. Sogno — 3 notti Cairo + 4 crociera","710 €"],
+    ["Pro. Amon — crociera 3 notti Aswan/Luxor","1100 €"],
+    ["Pro. Horus — crociera 4 notti Luxor/Aswan","470 €"],
+    ["Pro. Magico — crociera 7 notti Luxor/Aswan/Luxor","640 €"],
+    ["Pro. Classico — 3 notti Cairo + 3 crociera","650 €"],
+    ["Pro. Lago Nasser — 10 notti","Su richiesta"]
+  ],
+  "Escursioni — Il Cairo": [
+    ["Il Cairo classico (Museo, Cittadella, Khan el-Khalili)","210 €"],
+    ["Piramidi, Menfi e Saqqara","200 €"],
+    ["Cairo copto e Museo della Civiltà","175 €"],
+    ["Dahshour","185 €"]
+  ],
+  "Escursioni — Fayoum": [
+    ["Piramidi di Hauara e Lahun","250 €"],
+    ["Città di Madi","250 €"],
+    ["Valle delle Balene","250 €"]
+  ],
+  "Escursioni — Alessandria": [
+    ["Alessandria","250 €"],["El Alamein","270 €"],["Marsa Matrouh","350 €"]
+  ],
+  "Escursioni — Deserto occidentale": [
+    ["Oasi di Siwa","595 €"],["Oasi di Farafra","420 €"]
+  ],
+  "Escursioni — Luxor": [
+    ["Karnak e Luxor","180 €"],["Valle dei Re e delle Regine","210 €"],
+    ["Tempio di Habu","200 €"],["Il Ramesseo","200 €"],["Esna, Edfu e Kom Ombo","290 €"]
+  ],
+  "Escursioni — Sohag / Assuan / Sinai": [
+    ["Dendera e Abido","270 €"],["Assuan","230 €"],["Abu Simbel","295 €"],
+    ["Santa Caterina","300 €"],["Zaafarana","240 €"]
+  ]
+};
+
+(function(){
+  var db = null, unsub = null, currentBookings = [];
+
+  document.querySelectorAll('nav button').forEach(function(b){
+    b.addEventListener('click', function(){
+      document.querySelectorAll('nav button').forEach(function(x){x.classList.remove('active');});
+      document.querySelectorAll('.view').forEach(function(x){x.classList.remove('active');});
+      b.classList.add('active');
+      document.getElementById(b.dataset.view).classList.add('active');
+    });
+  });
+
+  // Programmi tab + form dropdown
+  var progList = document.getElementById('progList');
+  var fProg = document.getElementById('fProg');
+  Object.keys(PROGRAMMI).forEach(function(group){
+    var g = document.createElement('div'); g.className='prog-group'; g.textContent=group;
+    progList.appendChild(g);
+    var og = document.createElement('optgroup'); og.label = group;
+    PROGRAMMI[group].forEach(function(p){
+      var r = document.createElement('div'); r.className='prog-row';
+      r.innerHTML = '<span class="name">'+p[0]+'</span><span class="price">'+p[1]+'</span>';
+      progList.appendChild(r);
+      var o = document.createElement('option'); o.value=p[0]; o.textContent=p[0];
+      og.appendChild(o);
+    });
+    fProg.appendChild(og);
+  });
+
+  function calcPax(s,d,t){ return (s||0) + (d||0)*2 + (t||0)*3; }
+
+  function updateLiveCalc(){
+    var s=+document.getElementById('fS').value, d=+document.getElementById('fD').value, t=+document.getElementById('fT').value;
+    var pax = calcPax(s,d,t), rim = 6-pax;
+    document.getElementById('liveCalc').innerHTML = 'Totale persone: <strong>'+pax+'</strong> — Rimasti al gruppo di 6: <strong'+(rim<0?' class="neg"':'')+'>'+rim+'</strong>';
+  }
+  ['fS','fD','fT'].forEach(function(id){ document.getElementById(id).addEventListener('input', updateLiveCalc); });
+
+  function renderStats(list){
+    var tot = list.length;
+    var pax = list.reduce(function(a,b){ return a+calcPax(b.s,b.d,b.t); },0);
+    var rev = list.reduce(function(a,b){ return a+(Number(b.importo)||0); },0);
+    var upcoming = list.filter(function(b){ return b.dataDa; }).sort(function(a,b){ return a.dataDa.localeCompare(b.dataDa); })[0];
+    document.getElementById('stTot').textContent = tot;
+    document.getElementById('stPax').textContent = pax;
+    document.getElementById('stRev').textContent = rev.toLocaleString('it-IT')+' €';
+    document.getElementById('stNext').textContent = upcoming ? upcoming.dataDa.split('-').reverse().join('/') : '—';
+  }
+
+  function renderTable(list){
+    var wrap = document.getElementById('tableWrap');
+    var q = document.getElementById('searchBox').value.trim().toLowerCase();
+    var filtered = list.filter(function(b){
+      if(!q) return true;
+      return (b.nome||'').toLowerCase().indexOf(q)>-1 || (b.telefono||'').toLowerCase().indexOf(q)>-1;
+    });
+    if(filtered.length===0){ wrap.innerHTML = '<div class="empty">Nessuna prenotazione' + (q?' trovata':' ancora. Clicca "+ Nuova prenotazione" per iniziare.') + '</div>'; return; }
+    var rows = filtered.map(function(b){
+      var pax = calcPax(b.s,b.d,b.t), rim = 6-pax;
+      return '<tr data-id="'+b.id+'">'+
+        '<td style="text-align:right;">'+(b.nome||'')+'</td>'+
+        '<td>'+(b.telefono||'')+'</td>'+
+        '<td>'+(b.programma||'')+'</td>'+
+        '<td>'+(b.dataDa?b.dataDa.split('-').reverse().join('/'):'')+' → '+(b.dataA?b.dataA.split('-').reverse().join('/'):'')+'</td>'+
+        '<td>'+(b.s||0)+'/'+(b.d||0)+'/'+(b.t||0)+'</td>'+
+        '<td>'+pax+'</td>'+
+        '<td>'+(Number(b.importo)||0).toLocaleString('it-IT')+' €</td>'+
+        '<td class="'+(rim<0?'neg':'')+'">'+rim+'</td>'+
+        '<td><span class="badge '+(b.disp||'ok')+'">'+(b.disp||'ok')+'</span></td>'+
+        '<td><button class="btn small secondary editBtn">Modifica</button></td>'+
+      '</tr>';
+    }).join('');
+    wrap.innerHTML = '<table><thead><tr><th>Nome</th><th>Telefono</th><th>Programma</th><th>Date</th><th>S/D/T</th><th>Pax</th><th>Importo</th><th>Rimasti</th><th>Stato</th><th></th></tr></thead><tbody>'+rows+'</tbody></table>';
+    wrap.querySelectorAll('.editBtn').forEach(function(btn){
+      btn.addEventListener('click', function(){
+        var id = btn.closest('tr').dataset.id;
+        var b = currentBookings.find(function(x){ return x.id===id; });
+        if(b) openModal(b);
+      });
+    });
+  }
+
+  document.getElementById('searchBox').addEventListener('input', function(){ renderTable(currentBookings); });
+
+  function openModal(b){
+    document.getElementById('modalTitle').textContent = b ? 'Modifica prenotazione' : 'Nuova prenotazione';
+    document.getElementById('editId').value = b ? b.id : '';
+    document.getElementById('fNome').value = b ? (b.nome||'') : '';
+    document.getElementById('fTel').value = b ? (b.telefono||'') : '';
+    document.getElementById('fProg').value = b ? (b.programma||'') : '';
+    document.getElementById('fDa').value = b ? (b.dataDa||'') : '';
+    document.getElementById('fA').value = b ? (b.dataA||'') : '';
+    document.getElementById('fS').value = b ? (b.s||0) : 0;
+    document.getElementById('fD').value = b ? (b.d||0) : 0;
+    document.getElementById('fT').value = b ? (b.t||0) : 0;
+    document.getElementById('fImporto').value = b ? (b.importo||'') : '';
+    document.getElementById('fDisp').value = b ? (b.disp||'ok') : 'ok';
+    document.getElementById('btnDelete').style.display = b ? '' : 'none';
+    updateLiveCalc();
+    document.getElementById('modalBg').classList.add('open');
+  }
+  function closeModal(){ document.getElementById('modalBg').classList.remove('open'); }
+  document.getElementById('btnAdd').addEventListener('click', function(){ openModal(null); });
+  document.getElementById('btnCancel').addEventListener('click', closeModal);
+  document.getElementById('modalBg').addEventListener('click', function(e){ if(e.target===this) closeModal(); });
+
+  document.getElementById('btnSave').addEventListener('click', async function(){
+    if(!db){ alert('Salvataggio non disponibile in questa vista.'); return; }
+    var id = document.getElementById('editId').value;
+    var data = {
+      nome: document.getElementById('fNome').value.trim(),
+      telefono: document.getElementById('fTel').value.trim(),
+      programma: document.getElementById('fProg').value,
+      dataDa: document.getElementById('fDa').value,
+      dataA: document.getElementById('fA').value,
+      s: +document.getElementById('fS').value || 0,
+      d: +document.getElementById('fD').value || 0,
+      t: +document.getElementById('fT').value || 0,
+      importo: +document.getElementById('fImporto').value || 0,
+      disp: document.getElementById('fDisp').value
+    };
+    try{
+      if(id){ await db.collection('prenotazioni').doc(id).set(data); }
+      else{ await db.collection('prenotazioni').add(data); }
+      closeModal();
+    }catch(err){ alert('Errore nel salvataggio: ' + (err && err.message ? err.message : err)); }
+  });
+
+  document.getElementById('btnDelete').addEventListener('click', async function(){
+    var id = document.getElementById('editId').value;
+    if(!id || !db) return;
+    if(!confirm('Eliminare questa prenotazione?')) return;
+    try{ await db.collection('prenotazioni').doc(id).delete(); closeModal(); }
+    catch(err){ alert('Errore: ' + (err && err.message ? err.message : err)); }
+  });
+
+  async function init(){
+    try{
+      db = await claude.use('db');
+    }catch(e){ db = null; }
+    if(!db){
+      document.getElementById('tableWrap').innerHTML = '<div class="empty">Il salvataggio non è disponibile in questa anteprima. Apri la pagina pubblicata per usare il pannello.</div>';
+      return;
+    }
+    unsub = db.collection('prenotazioni').orderBy('dataDa','asc').onSnapshot(function(snap){
+      currentBookings = snap.docs.map(function(d){ var v=d.data(); v.id=d.id; return v; });
+      renderStats(currentBookings);
+      renderTable(currentBookings);
+    }, function(err){
+      document.getElementById('tableWrap').innerHTML = '<div class="empty">Errore di sincronizzazione: '+(err&&err.message?err.message:'')+'</div>';
+    });
+  }
+  // ---- Password gate ----
+  var VALID_PASSWORDS = ['masrlefin@gmail.com', '1985'];
+  var gate = document.getElementById('gate');
+  var appContent = document.getElementById('appContent');
+  var gatePass = document.getElementById('gatePass');
+  var gateBtn = document.getElementById('gateBtn');
+  var gateErr = document.getElementById('gateErr');
+
+  function unlock(){
+    gate.style.display = 'none';
+    appContent.style.display = 'block';
+    try{ localStorage.setItem('sm_admin_unlocked', '1'); }catch(e){}
+    init();
+  }
+  function tryPassword(){
+    var val = gatePass.value.trim();
+    if(VALID_PASSWORDS.indexOf(val) > -1){
+      gateErr.classList.remove('show');
+      unlock();
+    } else {
+      gateErr.classList.add('show');
+      gatePass.value = '';
+      gatePass.focus();
+    }
+  }
+  gateBtn.addEventListener('click', tryPassword);
+  gatePass.addEventListener('keydown', function(e){ if(e.key === 'Enter') tryPassword(); });
+
+  var alreadyUnlocked = false;
+  try{ alreadyUnlocked = localStorage.getItem('sm_admin_unlocked') === '1'; }catch(e){}
+  if(alreadyUnlocked){ unlock(); }
+  else { gatePass.focus(); }
+})();
+</script>
+</body>
+</html>
