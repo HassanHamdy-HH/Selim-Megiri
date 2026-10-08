@@ -502,6 +502,20 @@
   .mobile-menu a{display:block;font-family:var(--font-head);font-size:24px;padding:14px 0;border-bottom:1px solid var(--border-soft);}
   .mobile-menu .btn{margin-top:30px;width:100%;}
 </style>
+<script src="https://www.gstatic.com/firebasejs/10.14.1/firebase-app-compat.js"></script>
+<script src="https://www.gstatic.com/firebasejs/10.14.1/firebase-firestore-compat.js"></script>
+<script>
+  var firebaseConfig = {
+    apiKey: "AIzaSyA7EZSsn4Yi8bHHHOsEHqu17GeqO9djT7g",
+    authDomain: "selim-megiri.firebaseapp.com",
+    projectId: "selim-megiri",
+    storageBucket: "selim-megiri.firebasestorage.app",
+    messagingSenderId: "85827295663",
+    appId: "1:85827295663:web:d55943a61989f6d854b75a",
+    measurementId: "G-YQ962P56QD"
+  };
+  firebase.initializeApp(firebaseConfig);
+</script>
 </head>
 <body>
 
@@ -1119,7 +1133,7 @@ che la sua esperienza supera 32 anni, in Franco Rosso, Alpitour, Turisanda, Alba
   <div class="admin-panel-inner">
     <div class="admin-top">
       <h2>Modifica programmi e prezzi</h2>
-      <a href="https://claude.ai/artifact/EG8MVoSmdfgBrd6gVZKxuo" target="_blank" rel="noopener">Vai al pannello prenotazioni →</a>
+      <a href="admin.html" target="_blank" rel="noopener">Vai al pannello prenotazioni →</a>
     </div>
     <div id="adminFields"></div>
     <div class="admin-save-bar">
@@ -1565,7 +1579,7 @@ var AMON_PHOTOS = [
   }
   async function hydrateContent(){
     try{
-      contentDb = await claude.use('db');
+      contentDb = firebase.firestore();
       var snap = await contentDb.collection('content').get();
       snap.docs.forEach(function(doc){
         var el = document.querySelector('[data-id="' + doc.id + '"]');
@@ -1702,7 +1716,7 @@ var AMON_PHOTOS = [
   var depAddBtn = document.getElementById('depAddBtn');
   if(depAddBtn){
     depAddBtn.addEventListener('click', async function(){
-      if(!contentDb){ alert('Il salvataggio non è disponibile in questa anteprima. Apri il sito pubblicato per salvare le modifiche.'); return; }
+      if(!contentDb){ alert('Salvataggio non disponibile: controlla la connessione internet e ricarica la pagina.'); return; }
       var program = document.getElementById('depAddProgram').value;
       var date = document.getElementById('depAddDate').value;
       var note = document.getElementById('depAddNote').value.trim();
@@ -1769,7 +1783,7 @@ var AMON_PHOTOS = [
 
   document.getElementById('adminSaveBtn').addEventListener('click', async function(){
     var msg = document.getElementById('adminSaveMsg');
-    if(!contentDb){ alert('Il salvataggio non è disponibile in questa anteprima. Apri il sito pubblicato per salvare le modifiche.'); return; }
+    if(!contentDb){ alert('Salvataggio non disponibile: controlla la connessione internet e ricarica la pagina.'); return; }
     var items = document.querySelectorAll('#adminFields .admin-item');
     for(var i=0;i<items.length;i++){
       var box = items[i];
