@@ -76,6 +76,20 @@
   .overlap-warn.show{display:block;}
   @media(max-width:700px){.frow,.sdt{grid-template-columns:1fr 1fr;}table{font-size:11.5px;}th,td{padding:6px 5px;}}
 </style>
+<script src="https://www.gstatic.com/firebasejs/10.14.1/firebase-app-compat.js"></script>
+<script src="https://www.gstatic.com/firebasejs/10.14.1/firebase-firestore-compat.js"></script>
+<script>
+  var firebaseConfig = {
+    apiKey: "AIzaSyA7EZSsn4Yi8bHHHOsEHqu17GeqO9djT7g",
+    authDomain: "selim-megiri.firebaseapp.com",
+    projectId: "selim-megiri",
+    storageBucket: "selim-megiri.firebasestorage.app",
+    messagingSenderId: "85827295663",
+    appId: "1:85827295663:web:d55943a61989f6d854b75a",
+    measurementId: "G-YQ962P56QD"
+  };
+  firebase.initializeApp(firebaseConfig);
+</script>
 </head>
 <body>
 
@@ -462,11 +476,11 @@ var PROGRAMMI = {
 
   async function init(){
     try{
-      db = await claude.use('db');
+      db = firebase.firestore();
     }catch(e){ db = null; }
     if(!db){
-      document.getElementById('tableWrap').innerHTML = '<div class="empty">Il salvataggio non è disponibile in questa anteprima. Apri la pagina pubblicata per usare il pannello.</div>';
-      document.getElementById('closuresWrap').innerHTML = '<div class="empty">Il salvataggio non è disponibile in questa anteprima. Apri la pagina pubblicata per usare il pannello.</div>';
+      document.getElementById('tableWrap').innerHTML = '<div class="empty">Connessione al database non disponibile. Controlla la connessione internet e ricarica la pagina.</div>';
+      document.getElementById('closuresWrap').innerHTML = '<div class="empty">Connessione al database non disponibile. Controlla la connessione internet e ricarica la pagina.</div>';
       return;
     }
     unsub = db.collection('prenotazioni').orderBy('dataDa','asc').onSnapshot(function(snap){
