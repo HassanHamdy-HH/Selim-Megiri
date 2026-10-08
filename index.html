@@ -291,16 +291,30 @@
   .form-row{display:grid;grid-template-columns:1fr 1fr;gap:18px;}
   .field{margin-bottom:18px;}
   .field label{display:block;font-size:12.5px;font-weight:600;color:var(--ink-soft);margin-bottom:7px;}
-  .field input,.field textarea{
+  .field input,.field textarea,.field select{
     width:100%;padding:12px 14px;border:1px solid var(--border);border-radius:2px;background:var(--bg);
-    font-size:14px;color:var(--ink);transition:border-color .2s;
+    font-size:14px;color:var(--ink);transition:border-color .2s;font-family:inherit;
   }
-  .field input:focus,.field textarea:focus{border-color:var(--gold-bright);}
+  .field input:focus,.field textarea:focus,.field select:focus{border-color:var(--gold-bright);}
   .field textarea{resize:vertical;min-height:100px;}
   .field.error input,.field.error textarea{border-color:#C0392B;}
   .field-err{display:none;font-size:12px;color:#C0392B;margin-top:6px;}
   .field.error .field-err{display:block;}
   .form-note{font-size:12px;color:var(--ink-faint);margin-top:4px;}
+  .people-stepper{display:flex;align-items:stretch;}
+  .people-stepper button{
+    width:42px;flex:none;border:1px solid var(--border);background:var(--card);color:var(--ink);
+    font-size:18px;font-weight:600;cursor:pointer;line-height:1;
+  }
+  .people-stepper button:first-child{border-radius:2px 0 0 2px;border-right:none;}
+  .people-stepper button:last-child{border-radius:0 2px 2px 0;border-left:none;}
+  .people-stepper input{
+    flex:1;min-width:0;text-align:center;border-radius:0;-moz-appearance:textfield;
+  }
+  .people-stepper input::-webkit-outer-spin-button,.people-stepper input::-webkit-inner-spin-button{-webkit-appearance:none;margin:0;}
+  .price-estimate{font-size:13px;color:var(--gold);font-weight:600;margin:10px 0 18px;}
+  .price-estimate.note-style{color:var(--ink-faint);font-weight:500;}
+  .price-estimate:empty{display:none;}
   .form-ok{display:none;margin-top:16px;padding:14px 16px;background:var(--sky);border-radius:2px;font-size:13.5px;color:var(--primary-deep);}
   .form-ok.show{display:block;}
 
@@ -396,6 +410,8 @@
   .itinerary-day .day-content strong{display:block;font-size:15.5px;color:var(--ink);margin-bottom:2px;}
   .itinerary-day .day-content .day-sub{display:block;font-size:12.5px;color:var(--gold);margin-bottom:8px;}
   .itinerary-day .day-content p{font-size:14px;color:var(--ink-soft);}
+  .itinerary-day .day-content ul{font-size:14px;color:var(--ink-soft);padding-right:18px;margin-top:8px;}
+  .itinerary-day .day-content li{margin-bottom:6px;list-style:disc;}
   .detail-info-grid{display:grid;grid-template-columns:1fr 1fr;gap:24px;}
   .detail-info-box{background:var(--card);border:1px solid var(--border-soft);border-radius:3px;padding:22px 24px;}
   .detail-info-box h4{font-size:14px;color:var(--ink);margin-bottom:12px;}
@@ -680,32 +696,32 @@ che la sua esperienza supera 32 anni, in Franco Rosso, Alpitour, Turisanda, Alba
       <p class="lede" style="margin-top:0;">Prezzi a persona, base soggiorno: date, hotel e numero di partecipanti si adattano al tuo viaggio.</p>
     </div>
     <div class="tour-grid">
-      <article class="tour-card" data-id="pkg1">
+      <article class="tour-card" data-id="pkg1" data-detail="Pro. Deserto">
         <span class="pkg-tag">Cairo · Deserto</span>
         <h3>Pro. Deserto</h3>
-        <p>3 notti Cairo + 3 notti tra Alessandria e Siwa: le grandi piramidi e il silenzio del Grande Mare di Sabbia nello stesso viaggio.</p>
-        <div class="pkg-price">510 € <small>a persona</small></div>
+        <p>6 notti, 7 giorni tra il Cairo, Alessandria/El Alamein e l'Oasi di Siwa: le grandi piramidi, la costa mediterranea e il silenzio del Grande Mare di Sabbia nello stesso viaggio.</p>
+        <div class="pkg-price">1700 €</div>
         <a href="https://wa.me/201282722114" target="_blank" rel="noopener" class="pkg-cta">Chiedi disponibilità</a>
       </article>
-      <article class="tour-card" data-id="pkg2">
+      <article class="tour-card" data-id="pkg2" data-detail="Pro. Oasi">
         <span class="pkg-tag">Oasi · Deserto Bianco</span>
         <h3>Pro. Oasi</h3>
-        <p>7 notti: 3 al Cairo, 1 ad Alessandria, 1 nell'Oasi del Fayoum, 1 nell'Oasi di Bahariya, con il Deserto Bianco come tappa finale.</p>
-        <div class="pkg-price">Su richiesta</div>
+        <p>7 notti: 3 al Cairo, 1 ad Alessandria, 1 nell'Oasi del Fayoum, 1 nel Deserto Bianco e 1 nell'Oasi di Bahariya.</p>
+        <div class="pkg-price">1750 €</div>
         <a href="https://wa.me/201282722114" target="_blank" rel="noopener" class="pkg-cta">Chiedi disponibilità</a>
       </article>
-      <article class="tour-card" data-id="pkg3">
+      <article class="tour-card" data-id="pkg3" data-detail="Settimana mare — Ain Sokhna e Suez">
         <span class="pkg-tag">Mar Rosso</span>
         <h3>Settimana mare — Ain Sokhna e Suez</h3>
         <p>6 notti in hotel Tolip: una settimana di relax sul Mar Rosso, comoda anche da abbinare a qualche giorno al Cairo.</p>
         <div class="pkg-price">650 € <small>a persona</small></div>
         <a href="https://wa.me/201282722114" target="_blank" rel="noopener" class="pkg-cta">Chiedi disponibilità</a>
       </article>
-      <article class="tour-card" data-id="pkg4">
+      <article class="tour-card" data-id="pkg4" data-detail="Pro. Sogno">
         <span class="pkg-tag">Cairo · Crociera</span>
         <h3>Pro. Sogno</h3>
-        <p>3 notti Cairo + 4 notti di crociera sul Nilo: l'introduzione completa all'Egitto, tra piramidi e templi lungo il fiume.</p>
-        <div class="pkg-price">710 € <small>a persona</small></div>
+        <p>7 notti, 8 giorni: 3 notti al Cairo e 4 notti di crociera Luxor–Assuan, con Abu Simbel facoltativo. L'introduzione completa all'Egitto, tra piramidi e templi lungo il fiume.</p>
+        <div class="pkg-price">1750 €</div>
         <a href="https://wa.me/201282722114" target="_blank" rel="noopener" class="pkg-cta">Chiedi disponibilità</a>
       </article>
       <article class="tour-card" data-id="pkg5" data-detail="Pro. Amon">
@@ -715,32 +731,32 @@ che la sua esperienza supera 32 anni, in Franco Rosso, Alpitour, Turisanda, Alba
         <div class="pkg-price">1100 €</div>
         <a href="https://wa.me/201282722114" target="_blank" rel="noopener" class="pkg-cta">Chiedi disponibilità</a>
       </article>
-      <article class="tour-card" data-id="pkg6">
+      <article class="tour-card" data-id="pkg6" data-detail="Pro. Horus">
         <span class="pkg-tag">Crociera sul Nilo</span>
         <h3>Pro. Horus</h3>
         <p>Crociera di 4 notti tra Luxor e Assuan: un giorno in più per godersi con calma templi, mercati e tramonti sul fiume.</p>
-        <div class="pkg-price">470 € <small>a persona</small></div>
+        <div class="pkg-price">1350 €</div>
         <a href="https://wa.me/201282722114" target="_blank" rel="noopener" class="pkg-cta">Chiedi disponibilità</a>
       </article>
-      <article class="tour-card" data-id="pkg7">
+      <article class="tour-card" data-id="pkg7" data-detail="Pro. Magico">
         <span class="pkg-tag">Crociera sul Nilo</span>
         <h3>Pro. Magico</h3>
-        <p>7 notti di crociera Luxor–Assuan–Luxor: l'esperienza più completa sul fiume, per chi vuole viverlo senza fretta.</p>
-        <div class="pkg-price">640 € <small>a persona</small></div>
+        <p>7 notti, 8 giorni di crociera Luxor–Assuan–Luxor, con Abu Simbel facoltativo: l'esperienza più completa sul fiume, per chi vuole viverlo senza fretta.</p>
+        <div class="pkg-price">1750 €</div>
         <a href="https://wa.me/201282722114" target="_blank" rel="noopener" class="pkg-cta">Chiedi disponibilità</a>
       </article>
-      <article class="tour-card" data-id="pkg8">
+      <article class="tour-card" data-id="pkg8" data-detail="Pro. Classico">
         <span class="pkg-tag">Cairo · Crociera</span>
         <h3>Pro. Classico</h3>
-        <p>3 notti Cairo + 3 notti di crociera: l'equilibrio classico tra piramidi, musei e il Nilo, nel tempo di una settimana.</p>
-        <div class="pkg-price">650 € <small>a persona</small></div>
+        <p>6 notti, 7 giorni: 3 notti al Cairo e 3 notti di crociera Aswan–Luxor, con Abu Simbel facoltativo. L'equilibrio classico tra piramidi, musei e il Nilo.</p>
+        <div class="pkg-price">1570 €</div>
         <a href="https://wa.me/201282722114" target="_blank" rel="noopener" class="pkg-cta">Chiedi disponibilità</a>
       </article>
-      <article class="tour-card" data-id="pkg9">
+      <article class="tour-card" data-id="pkg9" data-detail="Pro. Lago Nasser">
         <span class="pkg-tag">Nilo · Lago Nasser</span>
         <h3>Pro. Lago Nasser</h3>
-        <p>10 notti: 3 al Cairo più due crociere, 4 sul Nilo e 3 sul Lago Nasser, fino ad Abu Simbel. Per chi vuole vedere tutto.</p>
-        <div class="pkg-price">Su richiesta</div>
+        <p>10 notti, 11 giorni: 3 al Cairo più due crociere, 4 sul Nilo (Luxor/Aswan) e 3 sul Lago Nasser fino ad Abu Simbel. Per chi vuole vedere tutto.</p>
+        <div class="pkg-price">2450 €</div>
         <a href="https://wa.me/201282722114" target="_blank" rel="noopener" class="pkg-cta">Chiedi disponibilità</a>
       </article>
     </div>
@@ -1012,14 +1028,23 @@ che la sua esperienza supera 32 anni, in Franco Rosso, Alpitour, Turisanda, Alba
             <input type="text" id="dates" name="dates" placeholder="es. ottobre 2026">
           </div>
           <div class="field">
-            <label for="people">Numero di viaggiatori</label>
-            <input type="text" id="people" name="people" placeholder="es. 2 adulti">
+            <label for="people">Numero di persone</label>
+            <div class="people-stepper">
+              <button type="button" id="peopleMinus" aria-label="Riduci">−</button>
+              <input type="number" id="people" name="people" min="1" step="1" value="1" inputmode="numeric">
+              <button type="button" id="peoplePlus" aria-label="Aumenta">+</button>
+            </div>
           </div>
         </div>
+        <div class="field">
+          <label for="cProgram">Quale programma ti interessa?</label>
+          <select id="cProgram" name="cProgram"></select>
+        </div>
+        <p class="price-estimate" id="contactEstimate"></p>
         <div class="field" id="f-message">
-          <label for="message">Quale programma ti interessa?</label>
-          <textarea id="message" name="message" placeholder="Pro. Amon, un'escursione ad Abu Simbel, un itinerario su misura..."></textarea>
-          <p class="field-err">Aggiungi qualche riga sul viaggio che hai in mente.</p>
+          <label for="message">Note aggiuntive (facoltative se hai già scelto un programma sopra)</label>
+          <textarea id="message" name="message" placeholder="Bambini, sistemazioni particolari, itinerario su misura..."></textarea>
+          <p class="field-err">Scegli un programma qui sopra oppure descrivi il tuo itinerario qui.</p>
         </div>
         <button type="submit" class="btn btn-primary" style="width:100%;">Invia la richiesta</button>
         <p class="form-note">Il pulsante apre la tua app email con i dati già compilati: nessun dato viene salvato su questo sito.</p>
@@ -1084,6 +1109,7 @@ che la sua esperienza supera 32 anni, in Franco Rosso, Alpitour, Turisanda, Alba
     <h3 id="modalTitle"></h3>
     <p id="modalDesc"></p>
     <div class="modal-price" id="modalPrice"></div>
+    <p class="price-estimate" id="modalEstimate"></p>
     <p class="modal-flight-note">✈️ Il volo non è incluso: prenotalo tu stesso su <a href="https://www.egyptair.com/ar/Pages/HomePage.aspx" target="_blank" rel="noopener">EgyptAir</a> per risparmiare fino a 600 €.</p>
     <p class="modal-flight-note">💳 Per confermare: caparra del 50% tramite bonifico (IBAN nella sezione Contatti), saldo in contanti all'arrivo.</p>
     <form class="modal-form" id="modalForm" novalidate>
@@ -1103,8 +1129,12 @@ che la sua esperienza supera 32 anni, in Franco Rosso, Alpitour, Turisanda, Alba
           <input type="text" id="mDates" placeholder="es. ottobre 2026">
         </div>
         <div class="field">
-          <label for="mPeople">Numero di viaggiatori</label>
-          <input type="text" id="mPeople" placeholder="es. 2 adulti">
+          <label for="mPeople">Numero di persone</label>
+          <div class="people-stepper">
+            <button type="button" id="mPeopleMinus" aria-label="Riduci">−</button>
+            <input type="number" id="mPeople" min="1" step="1" value="1" inputmode="numeric">
+            <button type="button" id="mPeoplePlus" aria-label="Aumenta">+</button>
+          </div>
         </div>
       </div>
       <div class="field">
@@ -1259,21 +1289,123 @@ che la sua esperienza supera 32 anni, in Franco Rosso, Alpitour, Turisanda, Alba
     requestAnimationFrame(step);
   }
 
+  // ---- Shared pricing helpers (used by the contact form and the per-program modal) ----
+  function parsePriceNumber(text){
+    if(!text) return null;
+    var m = String(text).replace(/\./g,'').match(/(\d+)/);
+    if(!m) return null;
+    var n = parseInt(m[1], 10);
+    return isNaN(n) ? null : n;
+  }
+  function isPerPersonPrice(text, forcePerPerson){
+    if(forcePerPerson) return true;
+    return !!(text && /a persona/i.test(text));
+  }
+  function stepperWire(inputId, minusId, plusId, onChange){
+    var input = document.getElementById(inputId);
+    var minus = document.getElementById(minusId);
+    var plus = document.getElementById(plusId);
+    if(!input) return;
+    input.addEventListener('input', onChange);
+    if(minus) minus.addEventListener('click', function(){
+      var v = parseInt(input.value, 10); if(isNaN(v)) v = 1;
+      if(v > 1) input.value = v - 1;
+      onChange();
+    });
+    if(plus) plus.addEventListener('click', function(){
+      var v = parseInt(input.value, 10); if(isNaN(v)) v = 0;
+      input.value = v + 1;
+      onChange();
+    });
+  }
+
+  // ---- Program index: built from the live DOM (packages + excursions), kept in sync after admin edits ----
+  var PROGRAM_INDEX = [];
+  function buildProgramIndex(){
+    PROGRAM_INDEX = [];
+    document.querySelectorAll('.tour-card').forEach(function(card){
+      var h3 = card.querySelector('h3');
+      var priceEl = card.querySelector('.pkg-price');
+      if(!h3 || !priceEl) return;
+      var priceText = priceEl.textContent.trim();
+      PROGRAM_INDEX.push({ label: h3.textContent.trim(), price: priceText, isPerPerson: isPerPersonPrice(priceText), group: 'Pacchetti' });
+    });
+    document.querySelectorAll('.exc-row').forEach(function(row){
+      var strongEl = row.querySelector('.info strong');
+      var priceEl = row.querySelector('.price');
+      if(!strongEl || !priceEl) return;
+      var group = row.closest('details.exc-group');
+      var groupLabel = 'Escursioni';
+      if(group){
+        var summary = group.querySelector('summary');
+        if(summary && summary.firstChild) groupLabel = summary.firstChild.textContent.trim();
+      }
+      PROGRAM_INDEX.push({ label: strongEl.textContent.trim(), price: priceEl.textContent.trim(), isPerPerson: true, group: groupLabel });
+    });
+  }
+  function populateProgramSelect(){
+    var sel = document.getElementById('cProgram');
+    if(!sel) return;
+    var currentVal = sel.value;
+    sel.innerHTML = '<option value="">Itinerario su misura / non so ancora</option>';
+    var groups = {}, order = [];
+    PROGRAM_INDEX.forEach(function(p){
+      if(!groups[p.group]){ groups[p.group] = []; order.push(p.group); }
+      groups[p.group].push(p);
+    });
+    order.forEach(function(g){
+      var og = document.createElement('optgroup'); og.label = g;
+      groups[g].forEach(function(p){
+        var o = document.createElement('option');
+        o.value = p.label; o.textContent = p.label + ' — ' + p.price;
+        og.appendChild(o);
+      });
+      sel.appendChild(og);
+    });
+    if(currentVal){ sel.value = currentVal; }
+  }
+  function findProgramByLabel(label){
+    if(!label) return null;
+    return PROGRAM_INDEX.filter(function(p){ return p.label === label; })[0] || null;
+  }
+  buildProgramIndex();
+  populateProgramSelect();
+
   var form = document.getElementById('bookingForm');
   var formOk = document.getElementById('formOk');
+  function updateContactEstimate(){
+    var peopleInput = document.getElementById('people');
+    var n = parseInt(peopleInput.value, 10); if(isNaN(n) || n < 1){ n = 1; peopleInput.value = 1; }
+    var estEl = document.getElementById('contactEstimate');
+    var prog = findProgramByLabel(document.getElementById('cProgram').value);
+    if(!prog){ estEl.textContent = ''; estEl.classList.remove('note-style'); return; }
+    var unit = prog.isPerPerson ? parsePriceNumber(prog.price) : null;
+    if(unit){
+      estEl.textContent = 'Totale stimato per ' + n + (n === 1 ? ' persona' : ' persone') + ': ' + (unit * n).toLocaleString('it-IT') + ' €';
+      estEl.classList.remove('note-style');
+    } else {
+      estEl.textContent = 'Il prezzo finale per ' + n + (n === 1 ? ' persona' : ' persone') + ' sarà confermato dalla guida in base alle dimensioni del gruppo.';
+      estEl.classList.add('note-style');
+    }
+  }
+  stepperWire('people', 'peopleMinus', 'peoplePlus', updateContactEstimate);
+  document.getElementById('cProgram').addEventListener('change', function(){ toggleError('f-message', false); updateContactEstimate(); });
+
   form.addEventListener('submit', function(e){
     e.preventDefault();
     var name = document.getElementById('name');
     var email = document.getElementById('email');
     var message = document.getElementById('message');
     var dates = document.getElementById('dates').value.trim();
-    var people = document.getElementById('people').value.trim();
+    var people = parseInt(document.getElementById('people').value, 10); if(isNaN(people) || people < 1) people = 1;
+    var prog = findProgramByLabel(document.getElementById('cProgram').value);
     var valid = true;
 
     toggleError('f-name', name.value.trim().length === 0); if(name.value.trim().length === 0) valid = false;
     var emailOk = /^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email.value.trim());
     toggleError('f-email', !emailOk); if(!emailOk) valid = false;
-    toggleError('f-message', message.value.trim().length === 0); if(message.value.trim().length === 0) valid = false;
+    var needsMessage = !prog && message.value.trim().length === 0;
+    toggleError('f-message', needsMessage); if(needsMessage) valid = false;
 
     if(!valid){ formOk.classList.remove('show'); return; }
 
@@ -1281,11 +1413,16 @@ che la sua esperienza supera 32 anni, in Franco Rosso, Alpitour, Turisanda, Alba
     var bodyLines = [
       'Nome: ' + name.value.trim(),
       'Email: ' + email.value.trim(),
-      'Periodo previsto: ' + (dates || 'da definire'),
-      'Numero di viaggiatori: ' + (people || 'da definire'),
-      '',
-      message.value.trim()
+      'Programma: ' + (prog ? (prog.label + ' — ' + prog.price) : 'Itinerario su misura (vedi note)'),
+      'Numero di persone: ' + people
     ];
+    if(prog && prog.isPerPerson){
+      var unit = parsePriceNumber(prog.price);
+      if(unit) bodyLines.push('Totale stimato: ' + (unit * people).toLocaleString('it-IT') + ' €');
+    }
+    bodyLines.push('Periodo previsto: ' + (dates || 'da definire'));
+    bodyLines.push('');
+    bodyLines.push(message.value.trim() || '(nessuna nota aggiuntiva)');
     var mailto = 'mailto:Selimmrgiri@gmail.com?subject=' + encodeURIComponent(subject) + '&body=' + encodeURIComponent(bodyLines.join('\n'));
     window.location.href = mailto;
     formOk.classList.add('show');
@@ -1311,20 +1448,38 @@ che la sua esperienza supera 32 anni, in Franco Rosso, Alpitour, Turisanda, Alba
   var modalClose = document.getElementById('modalClose');
   var modalForm = document.getElementById('modalForm');
   var modalFormOk = document.getElementById('modalFormOk');
+  var modalPerPerson = false, modalUnitPrice = null;
 
   function toggleModalError(fieldId, hasError){
     var field = document.getElementById(fieldId);
     if(field) field.classList.toggle('error', hasError);
   }
 
-  function openProgramModal(title, tag, desc, price){
+  function updateModalEstimate(){
+    var peopleInput = document.getElementById('mPeople');
+    var n = parseInt(peopleInput.value, 10); if(isNaN(n) || n < 1){ n = 1; peopleInput.value = 1; }
+    var estEl = document.getElementById('modalEstimate');
+    if(modalPerPerson && modalUnitPrice){
+      estEl.textContent = 'Totale stimato per ' + n + (n === 1 ? ' persona' : ' persone') + ': ' + (modalUnitPrice * n).toLocaleString('it-IT') + ' €';
+      estEl.classList.remove('note-style');
+    } else {
+      estEl.textContent = 'Il prezzo finale per ' + n + (n === 1 ? ' persona' : ' persone') + ' sarà confermato dalla guida in base alle dimensioni del gruppo.';
+      estEl.classList.add('note-style');
+    }
+  }
+  stepperWire('mPeople', 'mPeopleMinus', 'mPeoplePlus', updateModalEstimate);
+
+  function openProgramModal(title, tag, desc, price, forcePerPerson){
     modalTitle.textContent = title;
     if(tag){ modalTag.textContent = tag; modalTag.style.display = ''; }
     else { modalTag.style.display = 'none'; }
     modalDesc.textContent = desc;
     modalPrice.textContent = price;
+    modalPerPerson = isPerPersonPrice(price, forcePerPerson);
+    modalUnitPrice = modalPerPerson ? parsePriceNumber(price) : null;
     modalFormOk.classList.remove('show');
     modalForm.reset();
+    updateModalEstimate();
     ['mf-name','mf-email'].forEach(function(id){ toggleModalError(id, false); });
     modal.classList.add('open');
     modal.setAttribute('aria-hidden','false');
@@ -1381,6 +1536,605 @@ var AMON_PHOTOS = [
           label: '4° Giorno',
           sub: '(lunedì / sabato): Luxor - Italia',
           text: "Mattinata dedicata alla visita della riva occidentale del Nilo, trasferimento in Pullman per la visita della Valle dei Re, dove si effettuerà la visita di tre tombe risalenti al Nuovo Regno (16° secolo a.C.), scelta libera (consigliata dalla guida). Dopo la spiegazione della guida da fuori delle tombe si prosegue con la visita del tempio della Regina Hatshepsut con le sue tre terrazze e la sua struttura diversa. Si può fare una visita (facoltativa) del tempio meraviglioso di Ramses III a Medinet Habu, pieno di colori e ben conservato, insieme alla visita della Valle degli Operai, in cui si vedono due tombe meravigliose che risalgono al 12° secolo a.C., e alla fine visita dei Colossi di Memnone. Pranzo a bordo e trasferimento all'aeroporto di Luxor e buon rientro in Italia."
+        }
+      ],
+      included: [
+        'Pensione completa',
+        'Tutti i trasferimenti in Egitto come da programma, in mezzi di lusso',
+        'Nave 5 stelle',
+        'Alberghi 3 o 4 stelle',
+        'Gli ingressi ai monumenti e ai siti archeologici',
+        'Guida parlante italiano',
+        'Mance varie per tutto il viaggio (tranne alla guida)'
+      ],
+      excluded: [
+        "Il visto all'arrivo",
+        "I voli di andata e ritorno dall'Italia",
+        'I voli interni Cairo/Luxor/Aswan',
+        'Le visite facoltative',
+        "Le bevande, anche l'acqua",
+        'La mancia della guida (10 euro per persona al giorno)'
+      ],
+      childDiscounts: [
+        'Bambini da 0 a 4 anni: solo tasse',
+        'Riduzione di circa il 40% per i bambini da 6 a 11,999 anni (nella camera dei genitori)'
+      ],
+      documents: [
+        "Passaporto con validità non inferiore a sei mesi dalla data di partenza, oppure carta d'identità con validità non inferiore a tre mesi dalla data di partenza, con due foto",
+        "Per i minori senza carta d'identità è necessario il documento proprio o la registrazione in quello di chi li accompagna"
+      ],
+      notes: [
+        'Si segue il programma della motonave, quindi può succedere qualche cambiamento nel programma, ma si vedono comunque tutti i siti menzionati nel programma.',
+        'Questi programmi si considerano un contratto da rispettare.'
+      ],
+      validity: "I prezzi sono validi fino al 31/12/2026 (esclusa la settimana di Natale, Pasqua e Capodanno). I prezzi sono validi per gruppi di 6 persone: per gruppi di dimensione diversa il prezzo varia in base alle dimensioni del gruppo. È possibile organizzare viaggi anche per piccoli gruppi, a partire da 2 persone."
+    },
+    'Pro. Deserto': {
+      tag: 'Cairo · Deserto',
+      subtitle: '6 notti, 7 giorni (2 notti Cairo – 1 notte Alessandria/El Alamein – 3 notti Oasi di Siwa)',
+      price: '1700 Euro',
+      promo: 'Fate il biglietto aereo e risparmiate almeno 600 Euro, anche in un gruppo privato non è in mezzo a un gruppo da 15  a 40 pax, avendo un servizio ottimo da <strong>Selim Megiri</strong> che la sua esperienza supera 32 anni, in Franco Rosso, Alpitour, Turisanda, Albatour, Phone&amp;Go, Top Capi, Mistral, e Avventurenelmondo.',
+      photos: [],
+      photoCaptions: [],
+      photoPositions: [],
+      days: [
+        {
+          label: '1° Giorno',
+          sub: 'Cairo',
+          text: "Arrivo in aeroporto al Cairo, incontro con i partecipanti, trasferimento in albergo 3 o 4 stelle e sistemazione in camere. Cena in un ristorante vicino e pernottamento in albergo."
+        },
+        {
+          label: '2° Giorno',
+          sub: 'Cairo - Alessandria',
+          text: "Trasferimento con le valigie in pullman verso Alessandria (220 km): a metà strada, visita del monastero di San Macario il Grande (4° secolo d.C.), dove si può vedere la cassa con le reliquie sacre di San Giovanni Battista. Si prosegue verso Alessandria per la visita del sito archeologico di Kom El Shukafa con la sua bellissima catacomba, il sito della Colonna di Pompeo e la moderna Biblioteca di Alessandria, erede della più grande biblioteca del mondo antico. Pranzo a base di pesce nel ristorante dove mangiava il Re Farouk, poi visita (solo esterna) della fortezza di Qaet Bei. Trasferimento e sistemazione in albergo 3 o 4 stelle, cena in ristorante o in albergo e pernottamento ad Alessandria."
+        },
+        {
+          label: '3° Giorno',
+          sub: 'Alessandria - El Alamein - Oasi di Siwa',
+          text: "Trasferimento in pullman verso Siwa. Dopo circa 140 km, visita del sacrario italiano dove si trovano i resti di 3.600 soldati caduti durante la Seconda Guerra Mondiale, e del sacrario tedesco. Si prosegue verso Marsa Matrouh (140 km), con il suo mare azzurro, dove ci si ferma per il pranzo, e poi verso l'Oasi di Siwa (290 km) attraverso il deserto piatto e sabbioso, tra cammelli e tende dei beduini lungo la strada. Arrivo a Siwa, sistemazione in albergo, cena e pernottamento."
+        },
+        {
+          label: '4° Giorno',
+          sub: 'Oasi di Siwa',
+          text: "Trasferimento per la visita della Montagna dei Morti (epoca greca), con la tomba di Si Amun ancora decorata con i colori originali, e un bellissimo panorama sull'Oasi con i suoi 5 milioni di palme da dattero e ulivi. Si prosegue per il tempio di Alessandro Magno, detto il tempio dell'Oracolo di Amon, dove Alessandro Magno divenne faraone, e per la sorgente di Cleopatra. Rientro in albergo per il pranzo; nel pomeriggio esplorazione del Grande Mare di Sabbia in jeep 4x4, tra le dune fino alla sorgente di Bir Wahid (acqua sulfurea calda e fresca, con possibilità di bagno). Al tramonto, possibilità di cenare e pernottare in tenda nel deserto (facoltativo) oppure rientro in albergo per cena e pernottamento a Siwa."
+        },
+        {
+          label: '5° Giorno',
+          sub: 'Siwa',
+          text: "Mattinata libera, pranzo in albergo. Nel pomeriggio visita della fortezza di Shali (12° secolo d.C., costruita in karshif, cioè argilla) e della sorgente di Fatnas, ideale per le foto al tramonto. Rientro in albergo, cena e pernottamento a Siwa."
+        },
+        {
+          label: '6° Giorno',
+          sub: 'Siwa - Cairo',
+          text: "Trasferimento in pullman verso il Cairo (circa 650 km) e sistemazione in albergo 3 o 4 stelle (pranzo al sacco). Cena a base di pesce in un ristorante al Cairo, rientro e pernottamento in albergo."
+        },
+        {
+          label: '7° Giorno',
+          sub: 'Cairo - Italia',
+          text: "Trasferimento in pullman verso l'aeroporto del Cairo e rientro in Italia."
+        }
+      ],
+      included: [
+        'Pensione completa',
+        'Tutti i trasferimenti in Egitto come da programma, in mezzi di lusso',
+        'Alberghi 3 o 4 stelle',
+        'Gli ingressi ai monumenti e ai siti archeologici',
+        'Guida parlante italiano',
+        'Mance varie per tutto il viaggio (tranne alla guida)'
+      ],
+      excluded: [
+        "Il visto all'arrivo",
+        "I voli di andata e ritorno dall'Italia",
+        'Le visite facoltative',
+        "Le bevande, anche l'acqua",
+        'La mancia della guida (10 euro per persona al giorno)'
+      ],
+      childDiscounts: [
+        'Questo viaggio non è consigliabile per i bambini sotto i 12 anni'
+      ],
+      documents: [
+        "Passaporto con validità non inferiore a sei mesi dalla data di partenza, oppure carta d'identità con validità non inferiore a tre mesi dalla data di partenza, con due foto",
+        "Per i minori senza carta d'identità è necessario il documento proprio o la registrazione in quello di chi li accompagna"
+      ],
+      notes: [
+        'Questi programmi si considerano un contratto da rispettare.'
+      ],
+      validity: "I prezzi sono validi fino al 31/12/2026 (esclusa la settimana di Natale, Pasqua e Capodanno). I prezzi sono validi per gruppi di 7 persone: per gruppi di dimensione diversa il prezzo varia in base alle dimensioni del gruppo. È possibile organizzare viaggi anche per piccoli gruppi, a partire da 2 persone."
+    },
+    'Pro. Oasi': {
+      tag: 'Oasi · Deserto Bianco',
+      subtitle: '7 notti (3 al Cairo – 1 ad Alessandria – 1 nell\'Oasi del Fayoum – 1 nel Deserto Bianco – 1 nell\'Oasi di Bahariya)',
+      price: '1750 Euro',
+      promo: 'Fate il biglietto aereo e risparmiate almeno 600 Euro, anche in un gruppo privato non è in mezzo a un gruppo da 15  a 40 pax, avendo un servizio ottimo da <strong>Selim Megiri</strong> che la sua esperienza supera 32 anni, in Franco Rosso, Alpitour, Turisanda, Alba Tour, Phone&amp;Go, Top Capi, Mistral, e Avventurenelmondo.',
+      photos: [],
+      photoCaptions: [],
+      photoPositions: [],
+      days: [
+        {
+          label: '1° Giorno',
+          sub: 'Arrivo al Cairo',
+          text: "Arrivo all'aeroporto del Cairo, incontro e assistenza. Sistemazione nelle stanze dell'albergo con vista sulle piramidi. Cena e pernottamento al Cairo."
+        },
+        {
+          label: '2° Giorno',
+          sub: 'Dahshour e Saqqara',
+          text: "Partenza in pullman per la visita delle piramidi di Dahshour (la Piramide Romboidale e la Piramide Rossa di Snefru), pranzo e visita del complesso funerario del faraone Zoser a Saqqara, con la prima piramide del mondo, la piramide a gradoni. Cena e pernottamento in albergo al Cairo."
+        },
+        {
+          label: '3° Giorno',
+          sub: 'Grande Museo Egizio',
+          text: "Partenza in pullman per la visita del Grande Museo Egizio, pranzo, e visita del Museo della Civiltà, dove si trovano le mummie dei faraoni. Cena e pernottamento in albergo al Cairo."
+        },
+        {
+          label: '4° Giorno',
+          sub: 'Cairo - Alessandria',
+          text: "Partenza in pullman verso Alessandria, con visita del Monastero di San Macario il Grande lungo il tragitto. Arrivo ad Alessandria e visita della Biblioteca di Alessandria, la più grande biblioteca del mondo; pranzo e visita delle Catacombe e della Colonna di Pompeo, poi visita (solo esterna) della Fortezza di Qaetbay. Cena e pernottamento in albergo (3 stelle) ad Alessandria."
+        },
+        {
+          label: '5° Giorno',
+          sub: 'Alessandria - Fayoum',
+          text: "Partenza in pullman verso il Fayoum e visita della Piramide di Lahun, della Piramide di Hawwara e di Qasr Qaroun. Pranzo, cena e pernottamento in albergo (3 stelle) nel Fayoum."
+        },
+        {
+          label: '6° Giorno',
+          sub: 'Fayoum - Deserto Bianco',
+          text: "Partenza in pullman verso la Valle delle Balene e il Deserto Bianco. Pranzo al sacco, cena e pernottamento in campo tendato nel Deserto Bianco."
+        },
+        {
+          label: '7° Giorno',
+          sub: 'Deserto Bianco - Oasi di Bahariya',
+          text: "Partenza in pullman verso l'Oasi di Bahariya e visita del Museo delle Mummie Dorate, della tomba di Qasr Selim e del tempio di Alessandro Magno. Pranzo, cena e pernottamento in albergo (3 stelle) a Bahariya."
+        },
+        {
+          label: '8° Giorno',
+          sub: 'Bahariya - Cairo - Italia',
+          text: "Partenza in pullman verso l'aeroporto del Cairo e partenza per l'Italia."
+        }
+      ],
+      included: [
+        'Pensione completa',
+        'Tutti i trasferimenti in Egitto come da programma, in mezzi di lusso',
+        'Alberghi 3 o 4 stelle',
+        'Gli ingressi ai monumenti e ai siti archeologici',
+        'Guida parlante italiano',
+        'Mance varie per tutto il viaggio (tranne alla guida)'
+      ],
+      excluded: [
+        "Il visto all'arrivo",
+        "I voli di andata e ritorno dall'Italia",
+        'Le visite facoltative',
+        "Le bevande, anche l'acqua",
+        'La mancia della guida (10 euro per persona al giorno)'
+      ],
+      childDiscounts: [
+        'Bambini da 0 a 4 anni: solo tasse',
+        'Riduzione di circa il 40% per i bambini da 6 a 11,999 anni (nella camera dei genitori)'
+      ],
+      documents: [
+        "Passaporto con validità non inferiore a sei mesi dalla data di partenza, oppure carta d'identità con validità non inferiore a tre mesi dalla data di partenza, con due foto",
+        "Per i minori senza carta d'identità è necessario il documento proprio o la registrazione in quello di chi li accompagna"
+      ],
+      notes: [
+        'Questi programmi si considerano un contratto da rispettare.'
+      ],
+      validity: "I prezzi sono validi fino al 31/12/2026 (esclusa la settimana di Natale, Pasqua e Capodanno). I prezzi sono validi per gruppi di 6 persone: per gruppi di dimensione diversa il prezzo varia in base alle dimensioni del gruppo. È possibile organizzare viaggi anche per piccoli gruppi, a partire da 2 persone."
+    },
+    'Settimana mare — Ain Sokhna e Suez': {
+      tag: 'Mar Rosso',
+      subtitle: 'Una settimana (6 notti, 7 giorni) in pensione completa, spiaggia di Ain Sokhna e Suez, albergo Tolip',
+      price: '650 € a persona',
+      isPerPerson: true,
+      promo: 'Fate il biglietto aereo e risparmiate almeno 600 Euro, anche in un gruppo privato non è in mezzo a un gruppo da 15  a 40 pax, avendo un servizio ottimo da <strong>Selim Megiri</strong> che la sua esperienza supera 32 anni, in Franco Rosso, Alpitour, Turisanda, Alba Tour, Phone&amp;Go, Top Capi, Mistral, e Avventurenelmondo.',
+      photos: [],
+      photoCaptions: [],
+      photoPositions: [],
+      days: [
+        {
+          label: '1° Giorno',
+          sub: 'Arrivo e sistemazione',
+          text: "Arrivo all'aeroporto del Cairo, incontro e assistenza, trasferimento in albergo Tolip ad Ain Sokhna (120 km dal Cairo). Sistemazione nelle stanze dell'albergo Tolip (5 stelle) sul Mar Rosso, con una spiaggia meravigliosa. Pensione completa."
+        },
+        {
+          label: 'Dal 2° al 7° Giorno',
+          sub: 'Settimana di mare ad Ain Sokhna, con visite facoltative',
+          text: "Il resto della settimana si trascorre in pensione completa in albergo, sulla spiaggia. Al Cairo, a Suez e a Zaafarana, a circa un'ora dall'albergo, si possono organizzare le seguenti visite facoltative:<ul><li>A Suez: il Museo Nazionale di Suez, tra i più belli d'Egitto, e il Canale di Suez, con le navi che transitano tra il Mar Rosso e il Mediterraneo.</li><li>I monasteri di Sant'Antonio Abate (il primo monastero del mondo) e di San Paolo, a Zaafarana.</li><li>Le piramidi di Cheope, Chefren e Micerino, e il complesso funerario del faraone Zoser a Saqqara, con la prima piramide del mondo, quella a gradoni.</li><li>La Piramide Rossa di Snefru, la Piramide Romboidale e la città di Menfi, la prima capitale del mondo.</li><li>Il Museo Egizio, la Cittadella e la Moschea di Mohamed Ali.</li><li>La Linea di Bar-Lev e le Sorgenti di Mosè, nel Sinai.</li><li>La Chiesa Sospesa e la Chiesa di San Sergio nel quartiere copto del Cairo, e il grande mercato di Khan El Khalili.</li></ul>"
+        }
+      ],
+      included: [
+        'Pensione completa',
+        'Tutti i trasferimenti in Egitto come da programma, in mezzi di lusso',
+        'Alberghi 3 o 4 stelle',
+        'Gli ingressi ai monumenti e ai siti archeologici',
+        'Guida parlante italiano',
+        'Mance varie per tutto il viaggio (tranne alla guida)'
+      ],
+      excluded: [
+        "Il visto all'arrivo",
+        "I voli di andata e ritorno dall'Italia",
+        'Le visite facoltative',
+        "Le bevande, anche l'acqua",
+        'La mancia della guida (10 euro per persona al giorno)'
+      ],
+      childDiscounts: [
+        'Bambini da 0 a 4 anni: solo tasse',
+        'Riduzione di circa il 40% per i bambini da 6 a 11,999 anni (nella camera dei genitori)'
+      ],
+      documents: [
+        "Passaporto con validità non inferiore a sei mesi dalla data di partenza, oppure carta d'identità con validità non inferiore a tre mesi dalla data di partenza, con due foto",
+        "Per i minori senza carta d'identità è necessario il documento proprio o la registrazione in quello di chi li accompagna"
+      ],
+      notes: [
+        'Questi programmi si considerano un contratto da rispettare.'
+      ],
+      validity: "I prezzi sono validi fino al 31/12/2026 (esclusa la settimana di Natale, Pasqua e Capodanno). I prezzi sono validi per gruppi di 6 persone: per gruppi di dimensione diversa il prezzo varia in base alle dimensioni del gruppo. È possibile organizzare viaggi anche per piccoli gruppi, a partire da 2 persone."
+    },
+    'Pro. Sogno': {
+      tag: 'Cairo · Crociera',
+      subtitle: "7 notti, 8 giorni (3 notti al Cairo e 4 notti crociera Luxor - Aswan) - Abu Simbel (facoltativo)",
+      price: '1750 Euro',
+      promo: 'Fate il biglietto aereo e risparmiate almeno 600 Euro, anche in un gruppo privato non è in mezzo a un gruppo da 15  a 40 pax, avendo un servizio ottimo da <strong>Selim Megiri</strong> che la sua esperienza supera 32 anni, in Franco Rosso, Alpitour, Turisanda, Alba Tour, Phone&amp;Go, Top Capi, Mistral, e Avventurenelmondo.',
+      photos: [],
+      photoCaptions: [],
+      photoPositions: [],
+      days: [
+        {
+          label: '1° Giorno',
+          sub: '(venerdì / mercoledì): Cairo',
+          text: "Arrivo in aeroporto al Cairo, incontro con i partecipanti, trasferimento in albergo 3 o 4 stelle e sistemazione in camere. Cena in un ristorante vicino e pernottamento in albergo."
+        },
+        {
+          label: '2° Giorno',
+          sub: '(sabato / giovedì): Saqqara - le piramidi di Giza',
+          text: "Trasferimento in Pullman per la visita (facoltativa) di Dahshour per vedere la Piramide Romboidale e la piramide rossa del faraone Snefru, il padre di Cheope, si prosegue verso la prima piramide al mondo, la piramide a gradoni di Zoser, nella necropoli di Saqqara e il suo complesso funerario e si visita una bellissima tomba decorata e colorata risalente all'antico regno (2400 a.C.). Pranzo in un ristorante nella zona di Saqqara, visita della grande piramide di Cheope, quella di Chefren e quella di Micerino e della famosa Sfinge (l'ingresso alla grande piramide è escluso); cena in un ristorante di fronte alle piramidi. Possibilità (facoltativa) di passare una bella serata con lo spettacolo di suoni e luci delle Piramidi o un giro del Cairo di notte. Pernottamento in albergo al Cairo."
+        },
+        {
+          label: '3° Giorno',
+          sub: "(domenica / venerdì): il Museo Egizio, la Cittadella e la moschea di Mohamed Ali, il mercato di Khan el Khalili",
+          text: "Trasferimento nel mattino per la visita del Grande Museo Egizio (GEM) con il tesoro intero della tomba di Tutankhamon. Pranzo in un ristorante e dopo pranzo si prosegue verso la cittadella del Sultano Saladino e la moschea di Alabastro di Mohamed Ali; si può visitare (facoltativo) il quartiere copto, con la Chiesa Sospesa (5° secolo d.C.), la chiesa di San Sergio, la sinagoga ebraica, e si prosegue verso il grande bazar di Khan el Khalili. Verso le 19:30 trasferimento alla stazione per prendere il treno. Cena, colazione e pernottamento in treno (si dorme in una cuccetta in cabina doppia)."
+        },
+        {
+          label: '4° Giorno',
+          sub: '(lunedì / sabato): Cairo - Luxor',
+          text: "Si arriva a Luxor verso le 7:30 del mattino. Trasferimento per la visita del tempio più grande in assoluto, il tempio di Karnak, che racconta quasi tutta la storia faraonica, e il tempio di Luxor; trasferimento a bordo della M/N 5 stelle e sistemazione in cabine. In serata, dopo cena a bordo, si può fare un giro (facoltativo) per vedere la bellezza della città di Luxor e il meraviglioso tempio di Luxor illuminato. Pernottamento a bordo della M/N a Luxor."
+        },
+        {
+          label: '5° Giorno',
+          sub: '(martedì / domenica): Luxor - Edfu',
+          text: "Mattinata dedicata alla visita della riva occidentale del Nilo, trasferimento in Pullman per la visita della Valle dei Re, dove si effettua la visita di tre tombe risalenti al Nuovo Regno (16° secolo a.C.), scelta libera (consigliata dalla guida). Dopo la spiegazione della guida da fuori delle tombe si prosegue con la visita del tempio della Regina Hatshepsut, con le sue tre terrazze e la sua struttura diversa. Si può fare una visita facoltativa del tempio meraviglioso di Ramses III a Medinet Habu, pieno di colori e ben conservato, insieme alla Valle degli Operai, dove si vedono due tombe ben colorate, e alla fine la visita dei Colossi di Memnone. Rientro in M/N, pranzo a bordo e inizio della navigazione verso Edfu, passando la famosa Chiusa di Esna. Pernottamento a Edfu."
+        },
+        {
+          label: '6° Giorno',
+          sub: '(mercoledì / lunedì): Edfu - Kom Ombo',
+          text: "Mattinata dedicata alla visita in carrozzella (ogni 4 persone in una carrozzella) del tempio di Edfu, di epoca greco-romana ma risalente a un originale egizio, dedicato al dio Horus il falco: è il secondo tempio più grande in Egitto e il meglio conservato. Rientro in M/N, pranzo e navigazione verso Kom Ombo; appena la nave attracca di fronte al tempio si va a piedi per visitare il tempio di Kom Ombo, dedicato a due divinità, il dio Sobec il coccodrillo e il dio Haruiris il falco, con il museo dei coccodrilli; al rientro si comincia la navigazione verso Aswan. Cena e pernottamento a bordo della M/N ad Aswan."
+        },
+        {
+          label: '7° Giorno',
+          sub: '(giovedì / martedì): Aswan',
+          text: "Nel mattino, trasferimento in pullmino verso la Grande Diga di Aswan, passando sul corpo della Vecchia Diga di Aswan, e poi in barca a motore per vedere il tempio di File sull'isola Angelica, dedicato alla dea Iside, di epoca greco-romana ma risalente a un originale egizio; visita di una delle più famose fabbriche di essenze di Aswan. Rientro in M/N. Dopo pranzo, in barca a motore, visita (facoltativa) a un villaggio Nubiano, per conoscere la vita quotidiana di questo popolo, e giro (facoltativo) in barca a vela attorno all'isola Elefantina con visita del Giardino Botanico. Cena a bordo e, dopo cena, giro facoltativo in carrozzella per vedere la città e il famoso mercato delle spezie. Pernottamento a bordo della M/N ad Aswan."
+        },
+        {
+          label: '8° Giorno',
+          sub: '(venerdì / mercoledì): Aswan - Italia',
+          text: "Al mattino presto trasferimento in pullman (300 km) per la visita facoltativa del tempio meraviglioso, da non saltare, il tempio di Abu Simbel, l'ottava meraviglia del mondo, dedicato a 4 divinità fra le quali lo stesso Ramses II, i cui quattro colossi si ergono davanti all'ingresso (13° secolo a.C.). Pranzo e trasferimento all'aeroporto di Aswan per il rientro in Italia."
+        }
+      ],
+      included: [
+        'Pensione completa',
+        'Tutti i trasferimenti in Egitto come da programma, in mezzi di lusso',
+        'Nave 5 stelle',
+        'Alberghi 3 o 4 stelle',
+        'Gli ingressi ai monumenti e ai siti archeologici',
+        'Guida parlante italiano',
+        'Mance varie per tutto il viaggio (tranne alla guida)'
+      ],
+      excluded: [
+        "Il visto all'arrivo",
+        "I voli di andata e ritorno dall'Italia",
+        'I voli interni Cairo/Luxor/Aswan',
+        'Le visite facoltative',
+        "Le bevande, anche l'acqua",
+        'La mancia della guida (10 euro per persona al giorno)'
+      ],
+      childDiscounts: [
+        'Bambini da 0 a 4 anni: solo tasse',
+        'Riduzione di circa il 40% per i bambini da 6 a 11,999 anni (nella camera dei genitori)'
+      ],
+      documents: [
+        "Passaporto con validità non inferiore a sei mesi dalla data di partenza, oppure carta d'identità con validità non inferiore a tre mesi dalla data di partenza, con due foto",
+        "Per i minori senza carta d'identità è necessario il documento proprio o la registrazione in quello di chi li accompagna"
+      ],
+      notes: [
+        'Si segue il programma della motonave, quindi può succedere qualche cambiamento nel programma, ma si vedono comunque tutti i siti menzionati nel programma.',
+        'Questi programmi si considerano un contratto da rispettare.'
+      ],
+      validity: "I prezzi sono validi fino al 31/12/2026 (esclusa la settimana di Natale, Pasqua e Capodanno). I prezzi sono validi per gruppi di 6 persone: per gruppi di dimensione diversa il prezzo varia in base alle dimensioni del gruppo. È possibile organizzare viaggi anche per piccoli gruppi, a partire da 2 persone."
+    },
+    'Pro. Horus': {
+      tag: 'Crociera sul Nilo',
+      subtitle: '4 notti, 5 giorni (Luxor / Aswan)',
+      price: '1350 Euro',
+      promo: 'Fate il biglietto aereo e risparmiate almeno 600 Euro, anche in un gruppo privato non è in mezzo a un gruppo da 15  a 40 pax, avendo un servizio ottimo da <strong>Selim Megiri</strong> che la sua esperienza supera 32 anni, in Franco Rosso, Alpitour, Turisanda, Alba Tour, Phone&amp;Go, Top Capi, Mistral, e Avventurenelmondo.',
+      photos: [],
+      photoCaptions: [],
+      photoPositions: [],
+      days: [
+        {
+          label: '1° Giorno',
+          sub: '(lunedì / sabato): Cairo - Luxor',
+          text: "Si arriva a Luxor e trasferimento per la visita del tempio più grande in assoluto, il tempio di Karnak, che racconta quasi tutta la storia faraonica, e trasferimento a bordo della M/N 5 stelle. Sistemazione in cabine, si va a visitare il meraviglioso tempio di Luxor. Di sera si può fare un giro (facoltativo) per vedere la città di Luxor e la vita quotidiana del popolo e il tempio di Luxor illuminato. Cena e pernottamento a bordo della M/N a Luxor."
+        },
+        {
+          label: '2° Giorno',
+          sub: '(martedì / domenica): Luxor - Edfu',
+          text: "Mattinata dedicata alla visita della riva occidentale del Nilo, trasferimento in Pullman per la visita della Valle dei Re, dove si effettuerà la visita di tre tombe risalenti al Nuovo Regno (16° secolo a.C.), scelta libera. Dopo la spiegazione della guida da fuori delle tombe si prosegue con la visita del tempio della Regina Hatshepsut, con le sue tre terrazze e la sua struttura diversa. Si può fare una visita (facoltativa) del tempio meraviglioso di Ramses III a Medinet Habu, pieno di colori e ben conservato, e la Valle degli Operai, in cui si vedono due tombe meravigliose ben colorate, e alla fine visita dei Colossi di Memnone. Rientro in M/N, pranzo a bordo e inizio della navigazione verso Edfu, passando la famosa Chiusa di Esna. Pernottamento a Edfu."
+        },
+        {
+          label: '3° Giorno',
+          sub: '(mercoledì / lunedì): Edfu - Kom Ombo',
+          text: "Mattinata dedicata alla visita in carrozzella del tempio di Edfu, di epoca greco-romana, dedicato al dio Horus il falco: è il secondo tempio più grande in Egitto e il meglio conservato. Rientro in M/N, pranzo e navigazione verso Kom Ombo; appena la nave attracca di fronte al tempio si va a piedi per visitare il tempio di Kom Ombo, dedicato a due divinità, il dio Sobec il coccodrillo e il dio Haruiris il falco, e comincia la navigazione verso Aswan. Cena e pernottamento a bordo della M/N ad Aswan."
+        },
+        {
+          label: '4° Giorno',
+          sub: '(giovedì / martedì): Aswan',
+          text: "Nel mattino, trasferimento in pullmino verso la Grande Diga di Aswan, passando sul corpo della Vecchia Diga di Aswan, e poi in barca a motore per vedere il tempio di File sull'isola Angelica, dedicato alla dea Iside, ricostruito durante l'epoca greco-romana ma risalente a un originale egizio; visita di una delle più famose fabbriche di essenze di Aswan. Rientro in M/N. Dopo pranzo, in barca a motore, visita (facoltativa) a un villaggio Nubiano, per conoscere la vita quotidiana di questo popolo, e giro (facoltativo) attorno a un pezzetto dell'isola Elefantina con visita del Giardino Botanico. Cena a bordo e, dopo cena, giro facoltativo in carrozzella per vedere la bellezza della città e il famoso mercato delle spezie. Pernottamento a bordo della M/N ad Aswan."
+        },
+        {
+          label: '5° Giorno',
+          sub: '(venerdì / mercoledì): Aswan - Italia',
+          text: "Al mattino presto trasferimento in pullman (220 km) per la visita (facoltativa) del tempio meraviglioso, che non è da saltare, il tempio di Abu Simbel, l'ottava meraviglia del mondo, dedicato a 4 divinità fra le quali lo stesso Ramses II, i cui quattro colossi si ergono davanti all'ingresso (13° secolo a.C.). Pranzo a bordo e trasferimento all'aeroporto di Aswan per il rientro in Italia."
+        }
+      ],
+      included: [
+        'Pensione completa',
+        'Tutti i trasferimenti in Egitto come da programma, in mezzi di lusso',
+        'Nave 5 stelle',
+        'Alberghi 3 o 4 stelle',
+        'Gli ingressi ai monumenti e ai siti archeologici',
+        'Guida parlante italiano',
+        'Mance varie per tutto il viaggio (tranne alla guida)'
+      ],
+      excluded: [
+        "Il visto all'arrivo",
+        "I voli di andata e ritorno dall'Italia",
+        'I voli interni Cairo/Luxor/Aswan',
+        'Le visite facoltative',
+        "Le bevande, anche l'acqua",
+        'La mancia della guida (10 euro per persona al giorno)'
+      ],
+      childDiscounts: [
+        'Bambini da 0 a 4 anni: solo tasse',
+        'Riduzione di circa il 40% per i bambini da 6 a 11,999 anni (nella camera dei genitori)'
+      ],
+      documents: [
+        "Passaporto con validità non inferiore a sei mesi dalla data di partenza, oppure carta d'identità con validità non inferiore a tre mesi dalla data di partenza, con due foto",
+        "Per i minori senza carta d'identità è necessario il documento proprio o la registrazione in quello di chi li accompagna"
+      ],
+      notes: [
+        'Si segue il programma della motonave, quindi può succedere qualche cambiamento nel programma, ma si vedono comunque tutti i siti menzionati nel programma.',
+        'Questi programmi si considerano un contratto da rispettare.'
+      ],
+      validity: "I prezzi sono validi fino al 31/12/2026 (esclusa la settimana di Natale, Pasqua e Capodanno). I prezzi sono validi per gruppi di 6 persone: per gruppi di dimensione diversa il prezzo varia in base alle dimensioni del gruppo. È possibile organizzare viaggi anche per piccoli gruppi, a partire da 2 persone."
+    },
+    'Pro. Magico': {
+      tag: 'Crociera sul Nilo',
+      subtitle: '7 notti, 8 giorni (Luxor / Aswan / Luxor) - Abu Simbel (facoltativo)',
+      price: '1750 Euro',
+      promo: 'Fate il biglietto aereo e risparmiate almeno 600 Euro, anche in un gruppo privato non è in mezzo a un gruppo da 15  a 40 pax, avendo un servizio ottimo da <strong>Selim Megiri</strong> che la sua esperienza supera 32 anni, in Franco Rosso, Alpitour, Turisanda, Alba Tour, Phone&amp;Go, Top Capi, Mistral, e Avventurenelmondo.',
+      photos: [],
+      photoCaptions: [],
+      photoPositions: [],
+      days: [
+        {
+          label: '1° Giorno',
+          sub: '(lunedì / sabato): Luxor',
+          text: "Arrivo in aeroporto a Luxor, incontro con i partecipanti, trasferimento sulla M/N 5 stelle e sistemazione nelle cabine. Cena e pernottamento a bordo a Luxor."
+        },
+        {
+          label: '2° Giorno',
+          sub: '(martedì / domenica): Luxor - Edfu',
+          text: "Mattinata dedicata alla visita della riva occidentale del Nilo, trasferimento in Pullman per la visita della Valle dei Re, dove si effettuerà la visita di tre tombe risalenti al Nuovo Regno (16° secolo a.C.), scelta libera (consigliata dalla guida). Dopo la spiegazione della guida da fuori delle tombe si prosegue con la visita del tempio della Regina Hatshepsut, con le sue tre terrazze e il suo aspetto affascinante. Si può fare una visita (facoltativa) del tempio meraviglioso di Ramses III a Medinet Habu, pieno di colori e ben conservato, insieme alla Valle degli Operai, dove si vedono due tombe ben colorate, e poi la visita dei Colossi di Memnone. Rientro in M/N per il pranzo. Dopo pranzo inizia la navigazione verso Edfu, passando la famosa Chiusa di Esna di sera; cena seguita da una bella serata in discoteca e pernottamento a bordo a Edfu."
+        },
+        {
+          label: '3° Giorno',
+          sub: '(mercoledì / lunedì): Edfu - Kom Ombo - Aswan',
+          text: "Arrivo ad Edfu, mattinata libera per godersi il paesaggio lungo il fiume durante la navigazione verso Kom Ombo. Pranzo a bordo. Nel pomeriggio la M/N attracca di fronte al tempio di Kom Ombo, dove si va a piedi a visitare il tempio, unico nel suo genere, dedicato a due divinità, il dio Sobec il coccodrillo e il dio Haruiris il falco, dove si potrà ammirare il primo calendario del mondo, la borsa degli strumenti chirurgici del dio Imhotep e il museo dei coccodrilli. Si continua la navigazione verso Aswan. Cena seguita da un Gallabya party e pernottamento a bordo ad Aswan."
+        },
+        {
+          label: '4° Giorno',
+          sub: '(giovedì / martedì): Aswan',
+          text: "Al mattino, trasferimento in Pullman per vedere la Grande Diga di Aswan, passando sul corpo della Vecchia Diga di Aswan, e, in barca a motore, visita del tempio di File sull'isola Angelica, dedicato alla dea Iside, ricostruito durante l'epoca greco-romana ma risalente a un originale egizio; visita di una delle famose fabbriche di essenze di Aswan. Rientro in M/N e dopo pranzo si va in barca a motore a vedere uno dei villaggi Nubiani (facoltativo), passando un'oretta con una famiglia in una casa Nubiana, insieme a un giro attorno a un pezzo dell'isola Elefantina e la visita del Giardino Botanico. Dopo cena, giro in carrozzella (facoltativo) per godersi la bellezza della città e il famoso mercato delle spezie. Cena seguita da una festa Nubiana e pernottamento a bordo ad Aswan."
+        },
+        {
+          label: '5° Giorno',
+          sub: '(venerdì / mercoledì): Aswan - Abu Simbel (facoltativo)',
+          text: "Al mattino presto trasferimento in pullmino per la visita (facoltativa) del tempio meraviglioso, che non è da saltare, il tempio di Abu Simbel, l'ottava meraviglia del mondo, dedicato a 4 divinità fra le quali lo stesso Ramses II, i cui quattro colossi si ergono davanti all'ingresso (13° secolo a.C.). Rientro in M/N, pranzo e navigazione verso Kom Ombo godendo il panorama fluviale e il ponte solare e la piscina. Cena e pernottamento ad Aswan."
+        },
+        {
+          label: '6° Giorno',
+          sub: '(sabato / giovedì): Aswan - Kom Ombo - Edfu',
+          text: "Mattinata libera, inizia la navigazione verso Kom Ombo ed Edfu. Giornata libera a bordo della M/N. Cena seguita da un Gallabya party (festa araba mascherata) e pernottamento a bordo a Edfu."
+        },
+        {
+          label: '7° Giorno',
+          sub: '(domenica / venerdì): Edfu - Luxor',
+          text: "Mattinata dedicata alla visita in carrozzella del tempio di Edfu, ricostruito durante l'epoca greco-romana ma su un originale egizio, dedicato al dio falco Horus: è il secondo tempio più grande in Egitto e il meglio conservato. Rientro in M/N, pranzo e navigazione verso Luxor, passando la famosa Chiusa di Esna. Nel pomeriggio, visita del tempio più grande in assoluto, il tempio di Karnak, che riassume quasi tutta la storia faraonica; in serata, visita del meraviglioso tempio di Luxor suggestivamente illuminato, con un giro facoltativo per vedere la vita quotidiana del popolo di Luxor e un istituto statale del famoso papiro e un bazar statale. Cena e pernottamento a bordo a Luxor."
+        },
+        {
+          label: '8° Giorno',
+          sub: '(lunedì / sabato): Luxor - Italia',
+          text: "Pranzo a bordo e trasferimento all'aeroporto di Luxor per il rientro in Italia."
+        }
+      ],
+      included: [
+        'Pensione completa',
+        'Tutti i trasferimenti in Egitto come da programma, in mezzi di lusso',
+        'Nave 5 stelle',
+        'Alberghi 3 o 4 stelle',
+        'Gli ingressi ai monumenti e ai siti archeologici',
+        'Guida parlante italiano',
+        'Mance varie per tutto il viaggio (tranne alla guida)'
+      ],
+      excluded: [
+        "Il visto all'arrivo",
+        "I voli di andata e ritorno dall'Italia",
+        'I voli interni Cairo/Luxor/Aswan',
+        'Le visite facoltative',
+        "Le bevande, anche l'acqua",
+        'La mancia della guida (10 euro per persona al giorno)'
+      ],
+      childDiscounts: [
+        'Bambini da 0 a 4 anni: solo tasse',
+        'Riduzione di circa il 40% per i bambini da 6 a 11,999 anni (nella camera dei genitori)'
+      ],
+      documents: [
+        "Passaporto con validità non inferiore a sei mesi dalla data di partenza, oppure carta d'identità con validità non inferiore a tre mesi dalla data di partenza, con due foto",
+        "Per i minori senza carta d'identità è necessario il documento proprio o la registrazione in quello di chi li accompagna"
+      ],
+      notes: [
+        'Si segue il programma della motonave, quindi può succedere qualche cambiamento nel programma, ma si vedono comunque tutti i siti menzionati nel programma.',
+        'Questi programmi si considerano un contratto da rispettare.'
+      ],
+      validity: "I prezzi sono validi fino al 31/12/2026 (esclusa la settimana di Natale, Pasqua e Capodanno). I prezzi sono validi per gruppi di 6 persone: per gruppi di dimensione diversa il prezzo varia in base alle dimensioni del gruppo. È possibile organizzare viaggi anche per piccoli gruppi, a partire da 2 persone."
+    },
+    'Pro. Classico': {
+      tag: 'Cairo · Crociera',
+      subtitle: '6 notti, 7 giorni (3 notti Cairo + 3 notti crociera Aswan/Luxor) - Abu Simbel (facoltativo)',
+      price: '1570 Euro',
+      promo: 'Fate il biglietto aereo e risparmiate almeno 600 Euro, anche in un gruppo privato non è in mezzo a un gruppo da 15  a 40 pax, avendo un servizio ottimo da <strong>Selim Megiri</strong> che la sua esperienza supera 32 anni, in Franco Rosso, Alpitour, Turisanda, Alba Tour, Phone&amp;Go, Top Capi, Mistral, e Avventurenelmondo.',
+      photos: [],
+      photoCaptions: [],
+      photoPositions: [],
+      days: [
+        {
+          label: '1° Giorno',
+          sub: '(martedì / domenica): Cairo',
+          text: "Arrivo in aeroporto al Cairo, incontro con i partecipanti, trasferimento in albergo 3 o 4 stelle e sistemazione in stanza. Cena e pernottamento in albergo."
+        },
+        {
+          label: '2° Giorno',
+          sub: '(mercoledì / lunedì): Saqqara - Menfi e le piramidi di Giza',
+          text: "Trasferimento in Pullman per la visita (facoltativa) delle due piramidi di Dahshour, la Piramide Romboidale e la Piramide Rossa di Snefru, il padre di Cheope. Si prosegue con la visita della prima piramide al mondo, la Piramide a Gradoni di Zoser, nella necropoli di Saqqara, e di una bellissima tomba decorata e colorata risalente all'antico regno (2400 a.C.). Pranzo in un ristorante nella zona di Saqqara. Visita della grande piramide di Cheope, quella di Chefren e quella di Micerino e della famosa Sfinge; cena in un ristorante di fronte alle piramidi e, dopo cena, possibilità (facoltativa) di passare una bella serata con lo spettacolo di suoni e luci delle Piramidi o un giro del Cairo di notte. Pernottamento in albergo al Cairo."
+        },
+        {
+          label: '3° Giorno',
+          sub: "(giovedì / martedì): il Grande Museo Egizio (GEM), la Cittadella e la moschea di Mohamed Ali, il mercato di Khan el Khalili",
+          text: "Trasferimento nel mattino per la visita del Grande Museo Egizio (GEM) con il tesoro intero della tomba di Tutankhamon. Pranzo in un ristorante e, dopo pranzo, visita della cittadella del Sultano Saladino e la moschea di Alabastro di Mohamed Ali, e poi visita del grande bazar di Khan el Khalili. Verso le 17:30 trasferimento alla stazione per prendere il treno verso Aswan. Cena e pernottamento nella cuccetta del treno."
+        },
+        {
+          label: '4° Giorno',
+          sub: '(venerdì / mercoledì): Aswan',
+          text: "All'arrivo, trasferimento in pullmino verso la Grande Diga di Aswan, passando sul corpo della Vecchia Diga di Aswan, e poi in barca a motore per vedere il tempio meraviglioso di File sull'isola Angelica, dedicato alla dea Iside, ricostruito durante l'epoca greco-romana ma risalente a un originale egizio; visita di una delle più famose fabbriche di essenze di Aswan. Trasferimento in Pullman per la M/N 5 stelle e sistemazione in cabine. Pranzo a bordo e, dopo pranzo, in barca a motore, visita (facoltativa) a un villaggio Nubiano, passando un'oretta in una casa con una famiglia Nubiana per conoscere la vita quotidiana di questo popolo, insieme a un giro (facoltativo) attorno a un pezzo dell'isola Elefantina. Dopo cena, giro facoltativo in carrozzella per vedere la bellezza della città di Aswan e il famoso mercato delle spezie. Cena a bordo della M/N, seguita da una festa Nubiana, e pernottamento a bordo ad Aswan."
+        },
+        {
+          label: '5° Giorno',
+          sub: '(sabato / giovedì): Aswan - Kom Ombo - Edfu',
+          text: "Nel mattino presto, trasferimento in pullman per la visita (facoltativa) del tempio meraviglioso, che non è da saltare, il tempio di Abu Simbel, dedicato a 4 divinità fra le quali lo stesso Ramses II, considerato l'ottava meraviglia del mondo antico. Rientro in M/N. Comincia la navigazione verso Kom Ombo. Nel pomeriggio la M/N attracca di fronte al tempio di Kom Ombo, dove si va a piedi a vedere il tempio, unico nel suo genere, dedicato a due divinità, il dio Sobec il coccodrillo e il dio Haruiris il falco, dove si potrà ammirare il primo calendario del mondo e la borsa degli strumenti chirurgici del dio Imhotep e il museo dei coccodrilli imbalsamati. Dopo la visita si continua la navigazione verso Edfu. Serata di Gallabia party, cena e pernottamento a bordo a Edfu."
+        },
+        {
+          label: '6° Giorno',
+          sub: '(domenica / venerdì): Edfu - Luxor',
+          text: "Mattinata dedicata alla visita in carrozzella del tempio di Edfu, ricostruito durante l'epoca greco-romana, dedicato al dio Horus il falco: è il secondo tempio più grande in Egitto e il meglio conservato. Rientro in M/N, pranzo a bordo e navigazione verso Luxor, passando la famosa Chiusa di Esna. Si arriva a Luxor verso le 14:00, con trasferimento per la visita del tempio più grande in assoluto, il tempio di Karnak, che racconta quasi tutta la storia faraonica, e, in serata, il meraviglioso tempio di Luxor, suggestivamente illuminato; dopo cena si può fare un giro (facoltativo) per vedere la bellezza della città di Luxor. Cena e pernottamento a bordo a Luxor."
+        },
+        {
+          label: '7° Giorno',
+          sub: '(lunedì / sabato): Luxor - Italia',
+          text: "Mattinata dedicata alla visita della riva occidentale del Nilo, trasferimento in Pullman per la visita della Valle dei Re, dove si effettuerà la visita di tre tombe risalenti al Nuovo Regno (16° secolo a.C.), scelta libera. Dopo la spiegazione della guida da fuori delle tombe si prosegue con la visita del tempio della Regina Hatshepsut, con le sue tre terrazze e la sua struttura diversa. Si può fare una visita facoltativa del tempio meraviglioso di Ramses III a Medinet Habu, pieno di colori e ben conservato, insieme alla Valle degli Operai, in cui si vedono due tombe ben colorate, e alla fine visita dei Colossi di Memnone. Pranzo a bordo e trasferimento all'aeroporto di Luxor per il rientro in Italia."
+        }
+      ],
+      included: [
+        'Pensione completa',
+        'Tutti i trasferimenti in Egitto come da programma, in mezzi di lusso',
+        'Nave 5 stelle',
+        'Alberghi 3 o 4 stelle',
+        'Gli ingressi ai monumenti e ai siti archeologici',
+        'Guida parlante italiano',
+        'Mance varie per tutto il viaggio (tranne alla guida)'
+      ],
+      excluded: [
+        "Il visto all'arrivo",
+        "I voli di andata e ritorno dall'Italia",
+        'I voli interni Cairo/Luxor/Aswan',
+        'Le visite facoltative',
+        "Le bevande, anche l'acqua",
+        'La mancia della guida (10 euro per persona al giorno)'
+      ],
+      childDiscounts: [
+        'Bambini da 0 a 4 anni: solo tasse',
+        'Riduzione di circa il 40% per i bambini da 6 a 11,999 anni (nella camera dei genitori)'
+      ],
+      documents: [
+        "Passaporto con validità non inferiore a sei mesi dalla data di partenza, oppure carta d'identità con validità non inferiore a tre mesi dalla data di partenza, con due foto",
+        "Per i minori senza carta d'identità è necessario il documento proprio o la registrazione in quello di chi li accompagna"
+      ],
+      notes: [
+        'Si segue il programma della motonave, quindi può succedere qualche cambiamento nel programma, ma si vedono comunque tutti i siti menzionati nel programma.',
+        'Questi programmi si considerano un contratto da rispettare.'
+      ],
+      validity: "I prezzi sono validi fino al 31/12/2026 (esclusa la settimana di Natale, Pasqua e Capodanno). I prezzi sono validi per gruppi di 6 persone: per gruppi di dimensione diversa il prezzo varia in base alle dimensioni del gruppo. È possibile organizzare viaggi anche per piccoli gruppi, a partire da 2 persone."
+    },
+    'Pro. Lago Nasser': {
+      tag: 'Nilo · Lago Nasser',
+      subtitle: '10 notti, 11 giorni (3 notti Cairo + 4 notti crociera Luxor/Aswan + 3 notti crociera Lago Nasser)',
+      price: '2450 Euro',
+      promo: 'Fate il biglietto aereo e risparmiate almeno 600 Euro, anche in un gruppo privato non è in mezzo a un gruppo da 15  a 40 pax, avendo un servizio ottimo da <strong>Selim Megiri</strong> che la sua esperienza supera 32 anni, in Franco Rosso, Alpitour, Turisanda, Alba Tour, Phone&amp;Go, Top Capi, Mistral, e Avventurenelmondo.',
+      photos: [],
+      photoCaptions: [],
+      photoPositions: [],
+      days: [
+        {
+          label: '1° Giorno',
+          sub: '(venerdì): Arrivo al Cairo',
+          text: "Arrivo all'aeroporto del Cairo, assistenza e partenza in pullman verso l'albergo del Cairo con vista sulle Piramidi, e sistemazione in hotel 4 stelle."
+        },
+        {
+          label: '2° Giorno',
+          sub: '(sabato): Menfi, Saqqara e le piramidi di Giza',
+          text: "Visita della città di Menfi, del complesso funerario del faraone Zoser a Saqqara e delle piramidi di Giza."
+        },
+        {
+          label: '3° Giorno',
+          sub: '(domenica): Grande Museo Egizio, Cittadella e Khan el Khalili',
+          text: "Visita del Grande Museo Egizio, della Cittadella e del mercato di Khan el Khalili."
+        },
+        {
+          label: '4° Giorno',
+          sub: '(lunedì): Cairo - Luxor',
+          text: "Partenza prestissimo per l'aeroporto per il volo verso Luxor. Arrivo a Luxor e visita del tempio di Karnak e del tempio di Luxor, e sistemazione in cabine a bordo della motonave. Pernottamento a Luxor."
+        },
+        {
+          label: '5° Giorno',
+          sub: '(martedì): Luxor - Edfu',
+          text: "Partenza in pullman per la visita della Valle dei Re, del tempio della Regina Hatshepsut e dei Colossi di Memnone. Possibilità di visitare (facoltativo, circa 35 Euro) il tempio di Medinet Habu e la Valle delle Regine. Rientro in nave e inizio della navigazione verso Edfu, passando la Chiusa di Esna. Pernottamento a Edfu."
+        },
+        {
+          label: '6° Giorno',
+          sub: '(mercoledì): Edfu - Kom Ombo - Aswan',
+          text: "Partenza in carrozzella per la visita del tempio di Edfu, poi navigazione verso Kom Ombo e visita a piedi del tempio di Kom Ombo, e navigazione verso Aswan."
+        },
+        {
+          label: '7° Giorno',
+          sub: '(giovedì): Aswan',
+          text: "Partenza in pullman per la visita del tempio di File e della Grande Diga di Aswan. Possibilità facoltativa (circa 20 Euro) di visitare il villaggio Nubiano in barca a motore e di fare un giro in barca a vela attorno all'isola Elefantina. Pernottamento ad Aswan."
+        },
+        {
+          label: '8° Giorno',
+          sub: '(venerdì): Aswan - Abu Simbel',
+          text: "Sbarco e partenza in pullman verso Abu Simbel, imbarco e sistemazione in cabine sull'altra motonave, quella del Lago Nasser. Dopo pranzo, visita a piedi del tempio di Abu Simbel, con possibilità facoltativa (circa 20 Euro) di assistere allo spettacolo di suoni e luci di Abu Simbel. Pernottamento ad Abu Simbel."
+        },
+        {
+          label: '9° Giorno',
+          sub: '(sabato): Verso Wadi El Seboua',
+          text: "Navigazione verso Kasr Ibrim (spiegazione dal ponte sole) e verso il tempio di Amada, il tempio di El Derr e la tomba di Bennut, proseguendo verso Wadi El Seboua. Pernottamento a Wadi El Seboua."
+        },
+        {
+          label: '10° Giorno',
+          sub: '(domenica): Wadi El Seboua - Aswan',
+          text: "Visita del tempio di Wadi El Seboua, del tempio di El Dakka e del tempio di El Muharraqa, e navigazione verso Aswan. Pernottamento ad Aswan."
+        },
+        {
+          label: '11° Giorno',
+          sub: '(lunedì): Aswan - Italia',
+          text: "Visita del tempio di Kalabsha, del tempio di Beit El Wali e del tempio di Kertassi, e sbarco con trasferimento in aeroporto per la partenza verso l'Italia."
         }
       ],
       included: [
@@ -1472,7 +2226,7 @@ var AMON_PHOTOS = [
 
     document.getElementById('detailBookBtn').addEventListener('click', function(){
       closeDetailPage();
-      openProgramModal(key, d.tag, d.subtitle, d.price);
+      openProgramModal(key, d.tag, d.subtitle, d.price, d.isPerPerson);
     });
   }
   function closeDetailPage(){
@@ -1524,7 +2278,8 @@ var AMON_PHOTOS = [
         strongEl ? strongEl.textContent.trim() : '',
         tag,
         spanEl ? spanEl.textContent.trim() : '',
-        priceEl ? priceEl.textContent.trim() : ''
+        priceEl ? priceEl.textContent.trim() : '',
+        true
       );
     });
   });
@@ -1534,7 +2289,7 @@ var AMON_PHOTOS = [
     var name = document.getElementById('mName');
     var email = document.getElementById('mEmail');
     var dates = document.getElementById('mDates').value.trim();
-    var people = document.getElementById('mPeople').value.trim();
+    var people = parseInt(document.getElementById('mPeople').value, 10); if(isNaN(people) || people < 1) people = 1;
     var message = document.getElementById('mMessage').value.trim();
     var valid = true;
 
@@ -1550,14 +2305,19 @@ var AMON_PHOTOS = [
     var bodyLines = [
       'Programma: ' + modalTitle.textContent,
       'Prezzo: ' + modalPrice.textContent,
+      'Numero di persone: ' + people
+    ];
+    if(modalPerPerson && modalUnitPrice){
+      bodyLines.push('Totale stimato: ' + (modalUnitPrice * people).toLocaleString('it-IT') + ' €');
+    }
+    bodyLines.push(
       'Nome: ' + name.value.trim(),
       'Email: ' + email.value.trim(),
       'Periodo previsto: ' + (dates || 'da definire'),
-      'Numero di viaggiatori: ' + (people || 'da definire'),
       'Modalità di pagamento: caparra 50% tramite bonifico, saldo in contanti all\'arrivo',
       '',
       message || '(nessuna nota aggiuntiva)'
-    ];
+    );
     var mailto = 'mailto:Selimmrgiri@gmail.com?subject=' + encodeURIComponent(subject) + '&body=' + encodeURIComponent(bodyLines.join('\n'));
     window.location.href = mailto;
     modalFormOk.classList.add('show');
@@ -1590,6 +2350,8 @@ var AMON_PHOTOS = [
         if(f.descEl && v.desc) f.descEl.textContent = v.desc;
         if(f.priceEl && v.price) f.priceEl.textContent = v.price;
       });
+      buildProgramIndex();
+      populateProgramSelect();
     }catch(e){ contentDb = null; }
     if(contentDb){
       try{
@@ -1800,6 +2562,8 @@ var AMON_PHOTOS = [
         if(f.priceEl) f.priceEl.textContent = price;
       }
     }
+    buildProgramIndex();
+    populateProgramSelect();
     msg.classList.add('show');
     setTimeout(function(){ msg.classList.remove('show'); }, 3500);
   });
